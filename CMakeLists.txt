@@ -50,36 +50,44 @@ enable_testing()
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #   Grab all cpp files from includes folder
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
 set(INCLUDES_FOLDER includes)
 FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${INCLUDES_FOLDER}/*.cpp" )
+
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-
+set(LIRARY_FOLDER library)
+FILE(GLOB_RECURSE LIB_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${LIBRARY_FOLDER}/*.cpp" )
 
 ADD_EXECUTABLE(main
     main.cpp
     ${SOURCE_FILES}
+    ${LIB_FILES}
 )
 
 ADD_EXECUTABLE(basic_test
     _tests/_test_files/basic_test.cpp
     ${SOURCE_FILES}
+    ${LIB_FILES}
 )
-
 
 ADD_EXECUTABLE(testB
     _tests/_test_files/testB.cpp
     ${SOURCE_FILES}
+    ${LIB_FILES}
 )
 
-
+ADD_EXECUTABLE(test_input
+    _tests/_test_files/test_input.cpp
+    ${SOURCE_FILES}
+    ${LIB_FILES}
+)
 
 
 
 
 TARGET_LINK_LIBRARIES(basic_test gtest)
 TARGET_LINK_LIBRARIES(testB gtest)
-
+TARGET_LINK_LIBRARIES(test_input gtest)
 
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
@@ -92,6 +100,7 @@ if (SFML_FOUND)
     target_link_libraries(main ${SFML_LIBRARIES})
     target_link_libraries(basic_test ${SFML_LIBRARIES})
     target_link_libraries(testB ${SFML_LIBRARIES})
+    target_link_libraries(test_input ${SFML_LIBRARIES})
 endif()
 
 
