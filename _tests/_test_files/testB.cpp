@@ -1,12 +1,21 @@
 #include "gtest/gtest.h"
+#include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <set>
+#include <vector>
 
-//------------------------------------------------------------------------------
-//@TODO: include all files we are testing:
-#include "../../includes/stub/stub.h"
-
-
+//------------------------------------------------------------------------------------------
+//Files we are testing:
+#include "../../includes/queue/MyQueue.h"
+#include "../../includes/token/function.h"
+#include "../../includes/token/integer.h"
+#include "../../includes/token/leftparen.h"
+#include "../../includes/token/operator.h"
+#include "../../includes/token/rightparen.h"
+#include "../../includes/token/token.h"
+#include "../../includes/shunting_yard/shunting_yard.h"
+#include "../../includes/rpn/rpn.h"
 
 //------------------------------------------------------------------------------
 
@@ -24,12 +33,170 @@ bool test_stub(bool debug=false)
 //@TODO: add more test functions here:
 
 
+// testing greater precedence operator popping from operator stack
+bool test_sy_edge_greater_precedence_operator(bool debug = false)
+{
+  // queue input: 3 + 3 * 3 ^ 3 / 3
+  Queue<Token*> postfix;
+  Queue<Token*> infix2;
+  Queue<Token*> infix_q;
+  infix2.push(new Integer(3));
+  infix2.push(new Operator("+"));
+  infix2.push(new Integer(3));
+  infix2.push(new Operator("*"));
+  infix2.push(new Integer(3));
+  infix2.push(new Operator("^"));
+  infix2.push(new Integer(3));
+  infix2.push(new Operator("/"));
+  infix2.push(new Integer(3));
+  infix_q = infix2;
+  ShuntingYard sy(infix_q);
+
+  postfix = sy.postfix();
+  if(debug)
+  {
+    cout << "3 + 3 * 3 ^ 3 / 3: " << postfix << endl;
+    cout << "should be: " << "3 3 3 3 ^ * 3 / + " << endl;
+  }
+
+  RPN rpn(postfix);
+  double val = rpn();
+  if(val != 30)
+  {
+    cout << "Expected 30 but found " << val << endl;
+    return false;
+  }
+  return true;
+
+}
+
+
+
+// testing equal precedence operator and left associative
+bool test_sy_edge_equal_precedence_operator_left_associative(bool debug = false)
+{
+  // queue input: 3 + 3 * 3 / 3 
+  Queue<Token*> postfix;
+  Queue<Token*> infix2;
+  Queue<Token*> infix_q;
+  infix2.push(new Integer(3));
+  infix2.push(new Operator("+"));
+  infix2.push(new Integer(3));
+  infix2.push(new Operator("*"));
+  infix2.push(new Integer(3));
+  infix2.push(new Operator("/"));
+  infix2.push(new Integer(3));
+  infix_q = infix2;
+  ShuntingYard sy(infix_q);
+
+  postfix = sy.postfix();
+  if(debug)
+  {
+    cout << "3 + 3 * 3 ^ 3 / 3: " << postfix << endl;
+    cout << "should be: " << "3 3 3 * 3 / + " << endl;
+  }
+
+  RPN rpn(postfix);
+  double val = rpn();
+  if(val != 6)
+  {
+    cout << "Expected 6 but found " << val << endl;
+    return false;
+  }
+  return true;
+
+}
+
+// testing equal precedence operator and right associative
+bool test_sy_edge_equal_precedence_operator_right_associative(bool debug = false)
+{
+  // queue input: 2 + 2 ^ 2 ^ 2 
+  Queue<Token*> postfix;
+  Queue<Token*> infix2;
+  Queue<Token*> infix_q;
+  infix2.push(new Integer(2));
+  infix2.push(new Operator("+"));
+  infix2.push(new Integer(2));
+  infix2.push(new Operator("^"));
+  infix2.push(new Integer(2));
+  infix2.push(new Operator("^"));
+  infix2.push(new Integer(2));
+  infix_q = infix2;
+  ShuntingYard sy(infix_q);
+
+  postfix = sy.postfix();
+  if(debug)
+  {
+    cout << "2 + 2 ^ 2 ^ 2 : " << postfix << endl;
+    cout << "should be: " << "2 2 2 2 ^ ^ + " << endl;
+  }
+
+  RPN rpn(postfix);
+  double val = rpn();
+  if(val != 18)
+  {
+    cout << "Expected 18 but found " << val << endl;
+    return false;
+  }
+  return true;
+
+}
+
+// 2 - ( 2 + 2 ) ^ 2 * 2
+// 2 2 2 + 2 ^ 2 * -
+
+// testing equal precedence operator and but with parentheses
+bool test_sy_edge_equal_precedence_operator_parentheses(bool debug = false)
+{
+  // queue input: 2 - ( 2 + 2 ) ^ 2 * 2
+  Queue<Token*> postfix;
+  Queue<Token*> infix2;
+  Queue<Token*> infix_q;
+  infix2.push(new Integer(2));
+  infix2.push(new Operator("-"));
+  infix2.push(new LeftParen());
+  infix2.push(new Integer(2));
+  infix2.push(new Operator("+"));
+  infix2.push(new Integer(2));
+  infix2.push(new RightParen());
+  infix2.push(new Operator("^"));
+  infix2.push(new Integer(2));
+  infix2.push(new Operator("*"));
+  infix2.push(new Integer(2));
+  
+  infix_q = infix2;
+  ShuntingYard sy(infix_q);
+
+  postfix = sy.postfix();
+  if(debug)
+  {
+    cout << "2 - ( 2 + 2 ) ^ 2 * 2 : " << postfix << endl;
+    cout << "should be: " << "2 2 2 + 2 ^ 2 * - " << endl;
+  }
+
+  RPN rpn(postfix);
+  double val = rpn();
+  if(val != -30)
+  {
+    cout << "Expected -30 but found " << val << endl;
+    return false;
+  }
+  return true;
+
+}
+
+
+
+
+
+
+
 
 //------------------------------------------------------------------------------
 
 
 // Lord help me! 
-const bool debug = false;
+const bool debug = true;
 
 TEST(TEST_STUB, TestStub)
 {
@@ -37,11 +204,35 @@ TEST(TEST_STUB, TestStub)
   EXPECT_EQ(success, true);
 }
 
+
+
+
 //------------------------------------------------------------------------------
 //@TODO: add more test sets to call test functions here:
 
+TEST(TEST_SY_EDGE, TestSYEdgeGreaterPrecedenceOp)
+{
+  bool success = test_sy_edge_greater_precedence_operator(debug);
+  EXPECT_EQ(success, true);
+}
 
+TEST(TEST_SY_EDGE, TestSYEdgeEqualPrecedenceOpLeftAssociative)
+{
+  bool success = test_sy_edge_equal_precedence_operator_left_associative(debug);
+  EXPECT_EQ(success, true);
+}
 
+TEST(TEST_SY_EDGE, TestSYEdgeEqualPrecedenceOpRightAssociative)
+{
+  bool success = test_sy_edge_equal_precedence_operator_right_associative(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_SY_EDGE, TestSYEdgeEqualPrecedenceOpParen)
+{
+  bool success = test_sy_edge_equal_precedence_operator_parentheses(debug);
+  EXPECT_EQ(success, true);
+}
 //------------------------------------------------------------------------------
 
 

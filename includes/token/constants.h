@@ -1,0 +1,23 @@
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
+const int OPERATOR_NUM_NEEDED = 2;
+
+enum TOKEN_TYPES
+{
+  FUNCTION = 1,
+  INTEGER = 2,
+  OPERATOR = 3,
+  LPAREN = 4,
+  RPAREN = 5,
+  TOKEN = 6,
+};
+
+enum PRECEDENCE
+{
+  PRECEDNECE_1 = 10,
+  PRECEDENCE_2 = 20,
+  PRECEDENCE_3 = 30,
+  PRECEDENCE_4 = 40,
+};
+#endif //CONSTANTS_H
