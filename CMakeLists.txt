@@ -55,31 +55,26 @@ set(INCLUDES_FOLDER includes)
 FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${INCLUDES_FOLDER}/*.cpp" )
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-set(LIRARY_FOLDER library)
-FILE(GLOB_RECURSE LIB_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${LIBRARY_FOLDER}/*.cpp" )
+
 
 ADD_EXECUTABLE(main
     main.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
 )
 
 ADD_EXECUTABLE(basic_test
     _tests/_test_files/basic_test.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
 )
 
 ADD_EXECUTABLE(testB
     _tests/_test_files/testB.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
 )
 
 ADD_EXECUTABLE(test_input
     _tests/_test_files/test_input.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
 )
 
 

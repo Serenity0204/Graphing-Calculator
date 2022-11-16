@@ -11,6 +11,7 @@ enum TOKEN_TYPES
   LPAREN = 4,
   RPAREN = 5,
   TOKEN = 6,
+  VARIABLE = 7,
 };
 
 enum PRECEDENCE

@@ -4,10 +4,10 @@
 #include <iomanip>
 #include <set>
 #include <vector>
-
+#include <string>
 //------------------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../library/tokenizer/tokenizer.h"
+#include "../../includes/tokenizer/tokenizer.h"
 
 
 //------------------------------------------------------------------------------
@@ -25,12 +25,39 @@ bool test_stub(bool debug=false)
 //------------------------------------------------------------------------------
 //@TODO: add more test functions here:
 
-bool test_lib(bool debug)
+bool test_isNumber1(bool debug=false)
 {
-    test();
-    return true;
+  string num = "XXX123.555X123";
+  vector<string> res;
+  int pos = 0;
+  bool is_error = false;
+  while(pos < num.length())
+  {
+    string temp = "";
+    bool isNum =_isNumber(num, pos, temp, is_error);
+    if(isNum) res.push_back(temp);
+  }
+  if(res[0] != "123.555") return false;
+  if(res[1] != "123") return false;
+
+  return true;
 }
 
+bool test_isNumber2(bool debug=false)
+{
+  string num = "XXX123.X123";
+  int pos = 0;
+  bool is_error = false;
+  while(pos < num.length())
+  {
+    string temp = "";
+    bool isNum =_isNumber(num, pos, temp, is_error);
+    if(is_error) break;
+  }
+  if(pos != 7) return false;
+
+  return true;
+}
 
 
 
@@ -47,12 +74,17 @@ TEST(TEST_STUB, TestStub)
   EXPECT_EQ(success, true);
 }
 
-TEST(TEST_T, TestT)
+TEST(TEST_IS_NUMBER, TestIsNumber1)
 {
-    bool success = test_lib(debug);
-    EXPECT_EQ(success, true);
+  bool success = test_isNumber1(debug);
+  EXPECT_EQ(success, true);
 }
 
+TEST(TEST_IS_NUMBER, TestIsNumber2)
+{
+  bool success = test_isNumber2(debug);
+  EXPECT_EQ(success, true);
+}
 
 //------------------------------------------------------------------------------
 //@TODO: add more test sets to call test functions here:
