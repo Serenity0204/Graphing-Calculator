@@ -93,7 +93,7 @@ public:
   //Operations:
   void push(T item);                  //Enqueue
   T pop();                            //Dequeue
-
+  void clear();
   //Accessors:
   Iterator begin() const;             //Iterator to the head node
   Iterator end() const;               //Iterator to NULL
@@ -161,6 +161,16 @@ Queue<T>& Queue<T>::operator =(const Queue<T>& RHS)
   this->_rear = _copy_list<T>(this->_front, RHS._front);
   this->_size = RHS._size;
   return *this;
+}
+
+
+template<typename T>
+void Queue<T>::clear()
+{
+  _clear_list<T>(this->_front);
+  this->_front = nullptr;
+  this->_rear = nullptr;
+  this->_size = 0;
 }
 
 template<typename T>
