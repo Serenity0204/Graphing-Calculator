@@ -286,7 +286,7 @@ bool _is_number(string str, int pos, string& number, int prev_type, bool& is_err
 {
 
     if(!_is_digit(str[pos]) && !_is_unary_minus(str, pos, prev_type)) return false;
-    
+       
 
     number = "";
     if(str[pos] == '-')
