@@ -34,7 +34,7 @@ bool test_tokenize1(bool debug=false)
   bool error = false;
   Queue<int> types = _tokenize(num, tokens, error);
   cout << tokens << endl;
-  //cout << types << endl;
+  if(types.size() != tokens.size()) return false;
   return true;
 }
 
@@ -46,7 +46,7 @@ bool test_tokenize2(bool debug=false)
   bool error = false;
   Queue<int> types = _tokenize(num, tokens, error);
   cout << tokens << endl;
-  //cout << types << endl;
+  if(types.size() != tokens.size()) return false;
   return true;
 }
 
@@ -57,7 +57,7 @@ bool test_tokenize3(bool debug=false)
   bool error = false;
   Queue<int> types = _tokenize(num, tokens, error);
   cout << tokens << endl;
-  //cout << types << endl;
+  if(types.size() != tokens.size()) return false;
   return true;
 }
 

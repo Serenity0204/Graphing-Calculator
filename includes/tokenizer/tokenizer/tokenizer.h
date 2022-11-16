@@ -52,6 +52,35 @@ public:
         {
             string tk = this->_tokens.pop();
             int type = this->_types.pop();
+            Token* token;
+            if(type == INTEGER)
+            {
+                double num_temp = stod(tk);
+                token = new Integer(num_temp);
+                continue;
+            }
+            if(type == FUNCTION)
+            {
+                token = new Function(tk);
+                continue;
+            }
+            if(type == LPAREN)
+            {
+                token = new LeftParen();
+                continue;
+            }
+
+            if(type == RPAREN)
+            {
+                token = new RightParen();
+                continue;
+            }
+
+            if(type == OPERATOR)
+            {
+                token = new Operator(tk);
+                continue;
+            }
             
         }
         
