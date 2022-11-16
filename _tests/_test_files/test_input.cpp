@@ -7,7 +7,7 @@
 #include <string>
 //------------------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../includes/tokenizer/tokenizer.h"
+#include "../../includes/tokenizer/tokenizer_functions/tokenizer_functions.h"
 
 
 //------------------------------------------------------------------------------
@@ -28,14 +28,19 @@ bool test_stub(bool debug=false)
 bool test_isNumber1(bool debug=false)
 {
   string num = "XXX123.555X123";
+  string temp = "";
   vector<string> res;
   int pos = 0;
   bool is_error = false;
   while(pos < num.length())
   {
-    string temp = "";
-    bool isNum =_isNumber(num, pos, temp, is_error);
-    if(isNum) res.push_back(temp);
+    if(_is_number(num, pos, temp, is_error))
+    {
+      pos += temp.length();
+      res.push_back(temp);
+      continue;
+    }
+    pos++;
   }
   if(res[0] != "123.555") return false;
   if(res[1] != "123") return false;
@@ -47,19 +52,34 @@ bool test_isNumber2(bool debug=false)
 {
   string num = "XXX123.X123";
   int pos = 0;
+  string temp = "";
   bool is_error = false;
   while(pos < num.length())
   {
-    string temp = "";
-    bool isNum =_isNumber(num, pos, temp, is_error);
-    if(is_error) break;
+    if(_is_number(num, pos, temp, is_error))
+    {
+      pos += temp.length();
+      continue;
+    }
+    pos++;
+    if(is_error) return true;
   }
-  if(pos != 7) return false;
 
-  return true;
+
+  return false;
 }
 
 
+
+bool test_tokenize1(bool debug=false)
+{
+  string num = "123.55+6.5";
+  Queue<string> q;
+  bool error = false;
+  _tokenize(num, q, error);
+  cout << q << endl;
+  return true;
+}
 
 
 //------------------------------------------------------------------------------
@@ -83,6 +103,12 @@ TEST(TEST_IS_NUMBER, TestIsNumber1)
 TEST(TEST_IS_NUMBER, TestIsNumber2)
 {
   bool success = test_isNumber2(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_TOKENIZE, TestTokenize1)
+{
+  bool success = test_tokenize1(debug);
   EXPECT_EQ(success, true);
 }
 

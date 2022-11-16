@@ -62,15 +62,12 @@ ADD_EXECUTABLE(main
     ${SOURCE_FILES}
 )
 
-ADD_EXECUTABLE(basic_test
-    _tests/_test_files/basic_test.cpp
+ADD_EXECUTABLE(test_shunting_yard_and_rpn
+    _tests/_test_files/test_shunting_yard_and_rpn.cpp
     ${SOURCE_FILES}
 )
 
-ADD_EXECUTABLE(testB
-    _tests/_test_files/testB.cpp
-    ${SOURCE_FILES}
-)
+
 
 ADD_EXECUTABLE(test_input
     _tests/_test_files/test_input.cpp
@@ -80,8 +77,7 @@ ADD_EXECUTABLE(test_input
 
 
 
-TARGET_LINK_LIBRARIES(basic_test gtest)
-TARGET_LINK_LIBRARIES(testB gtest)
+TARGET_LINK_LIBRARIES(test_shunting_yard_and_rpn gtest)
 TARGET_LINK_LIBRARIES(test_input gtest)
 
 ## copy resources file to build
@@ -93,8 +89,7 @@ find_package(SFML REQUIRED system window graphics network audio)
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(main ${SFML_LIBRARIES})
-    target_link_libraries(basic_test ${SFML_LIBRARIES})
-    target_link_libraries(testB ${SFML_LIBRARIES})
+    target_link_libraries(test_shunting_yard_and_rpn ${SFML_LIBRARIES})
     target_link_libraries(test_input ${SFML_LIBRARIES})
 endif()
 

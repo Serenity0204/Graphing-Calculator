@@ -7,15 +7,15 @@
 
 //------------------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../includes/queue/MyQueue.h"
-#include "../../includes/token/function.h"
-#include "../../includes/token/integer.h"
-#include "../../includes/token/leftparen.h"
-#include "../../includes/token/operator.h"
-#include "../../includes/token/rightparen.h"
-#include "../../includes/token/token.h"
-#include "../../includes/shunting_yard/shunting_yard.h"
-#include "../../includes/rpn/rpn.h"
+#include "../../includes/lib/queue/MyQueue.h"
+#include "../../includes/lib/token/function.h"
+#include "../../includes/lib/token/integer.h"
+#include "../../includes/lib/token/leftparen.h"
+#include "../../includes/lib/token/operator.h"
+#include "../../includes/lib/token/rightparen.h"
+#include "../../includes/lib/token/token.h"
+#include "../../includes/lib/shunting_yard/shunting_yard.h"
+#include "../../includes/lib/rpn/rpn.h"
 
 //------------------------------------------------------------------------------
 
@@ -196,7 +196,7 @@ bool test_sy_edge_equal_precedence_operator_parentheses(bool debug = false)
 
 
 // Lord help me! 
-const bool debug = true;
+const bool debug = false;
 
 TEST(TEST_STUB, TestStub)
 {
