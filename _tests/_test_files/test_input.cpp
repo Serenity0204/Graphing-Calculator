@@ -34,23 +34,32 @@ bool test_tokenize1(bool debug=false)
   bool error = false;
   Queue<int> types = _tokenize(num, tokens, error);
   cout << tokens << endl;
-  cout << types << endl;
+  //cout << types << endl;
   return true;
 }
 
 
 bool test_tokenize2(bool debug=false)
 {
-  string num = "6x^2^2+(9+x^3)^9";
+  string num = "6x^2^2+(9+x^3)^-9";
   Queue<string> tokens;
   bool error = false;
   Queue<int> types = _tokenize(num, tokens, error);
   cout << tokens << endl;
-  cout << types << endl;
+  //cout << types << endl;
   return true;
 }
 
-
+bool test_tokenize3(bool debug=false)
+{
+  string num = "1 + 100 + max(x + 6, -9   ) + sin(x^-2)";
+  Queue<string> tokens;
+  bool error = false;
+  Queue<int> types = _tokenize(num, tokens, error);
+  cout << tokens << endl;
+  //cout << types << endl;
+  return true;
+}
 
 //------------------------------------------------------------------------------
 
@@ -66,18 +75,23 @@ TEST(TEST_STUB, TestStub)
 
 
 
-TEST(TEST_TOKENIZE, TestTokenize1)
+TEST(TEST_TOKENIZER, TestTokenize1)
 {
   bool success = test_tokenize1(debug);
   EXPECT_EQ(success, true);
 }
 
-TEST(TEST_TOKENIZE, TestTokenize2)
+TEST(TEST_TOKENIZER, TestTokenize2)
 {
   bool success = test_tokenize2(debug);
   EXPECT_EQ(success, true);
 }
 
+TEST(TEST_TOKENIZER, TestTokenize3)
+{
+  bool success = test_tokenize3(debug);
+  EXPECT_EQ(success, true);
+}
 //------------------------------------------------------------------------------
 //@TODO: add more test sets to call test functions here:
 

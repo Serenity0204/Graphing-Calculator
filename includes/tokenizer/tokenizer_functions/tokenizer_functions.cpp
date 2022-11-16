@@ -35,9 +35,11 @@ Queue<int> _tokenize(string input, Queue<string>& tokens, bool& error)
 void _get_token(string input, int& index, string& token, int& token_type, int previous_type, bool& error)
 {
     token = "";
-    string tk1, tk2, tk3, tk4, tk5;
+    string tk1, tk2, tk3, tk4, tk5, tk6;
 
-    bool is_num = _is_number(input, index, tk5, error);
+
+
+    bool is_num = _is_number(input, index, tk5, previous_type, error);
     if(error) return;
     if(is_num) 
     {
@@ -48,14 +50,13 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
         return;
     }
 
-    bool is_op = _is_operator(input, index, tk1);
-    if(is_op)
+    bool is_func = _is_function(input, index, tk4, error);
+    if(is_func) 
     {
-        
-        token = tk1;
+        token = tk4;
         //cout <<"token is: " <<token << " and length is: "<< token.length()<< endl;
         index += token.length();
-        token_type = OPERATOR;
+        token_type = FUNCTION;
         return;
     }
 
@@ -79,16 +80,17 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
         return;
     }
 
-    bool is_func = _is_function(input, index, tk4, error);
-    if(is_func) 
+
+    bool is_op = _is_operator(input, index, tk1);
+    if(is_op)
     {
-        token = tk4;
+        
+        token = tk1;
         //cout <<"token is: " <<token << " and length is: "<< token.length()<< endl;
         index += token.length();
-        token_type = FUNCTION;
+        token_type = OPERATOR;
         return;
     }
-
 
 
     if(token.length() == 0)
@@ -97,6 +99,9 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
         return;
     }
 }
+
+
+
 
 
 
@@ -169,83 +174,90 @@ bool _is_function(string str, int pos, string& func, bool& error)
         error = true;
         return false;
     }
+    func = "";
+
+
+    if(str.substr(pos, 3) == "max")
+    {
+        func += "max";
+        return true;
+    }
 
     if(str.substr(pos, 3) == "sin")
     {
-        func = "sin";
+        func += "sin";
         return true;   
     }
     if(str.substr(pos, 3) == "cos")
     {
-        func = "cos";
+        func += "cos";
         return true;
     }
     if(str.substr(pos, 3) == "tan")
     {
-        func = "tan";
+        func += "tan";
         return true;
     }
     
     if(str.substr(pos, 3) == "tan")
     {
-        func = "tan";
+        func += "tan";
         return true;
     }
 
     if(str.substr(pos, 6) == "arcsin")
     {
-        func = "arcsin";
+        func += "arcsin";
         return true;
     }
     
 
     if(str.substr(pos, 6) == "arccos")
     {
-        func = "arccos";
+        func += "arccos";
         return true;
     }
 
     if(str.substr(pos, 6) == "arctan")
     {
-        func = "arctan";
+        func += "arctan";
         return true;
     }
     
     if(str.substr(pos, 4) == "sinh")
     {
-        func = "sinh";
+        func += "sinh";
         return true;
     }
     
     if(str.substr(pos, 4) == "cosh")
     {
-        func = "cosh";
+        func += "cosh";
         return true;
     }
     
     if(str.substr(pos, 4) == "tanh")
     {
-        func = "tanh";
+        func += "tanh";
         return true;
     }
     
     if(str.substr(pos, 2) == "ln")
     {
-        func = "ln";
+        func += "ln";
         return true;
     }
     
     if(str.substr(pos, 3) == "log")
     {
-        func = "log";
+        func += "log";
         return true;
     }
     if(str.substr(pos, 1) == "x")
     {
-        func = "x";
+        func += "x";
         return true;
     }
-    func = "";
     return false;
 }
 
@@ -257,15 +269,31 @@ bool _is_digit(char c)
     return false;
 }
 
+
+// check for negative sign
+bool _is_unary_minus(string input, int pos, int prev_type)
+{
+    bool is_unary_check = ((pos == 0) || (prev_type == LPAREN) || (prev_type == OPERATOR));
+    if(input[pos] == '-' && is_unary_check) return true;
+    return false;
+}
+
+
+
+
 // check if it's number or not
-bool _is_number(string str, int pos, string& number, bool& is_error)
+bool _is_number(string str, int pos, string& number, int prev_type, bool& is_error)
 {
 
-    if(!_is_digit(str[pos])) return false;
-    //  
+    if(!_is_digit(str[pos]) && !_is_unary_minus(str, pos, prev_type)) return false;
+    
 
     number = "";
-
+    if(str[pos] == '-')
+    {
+        number += str[pos];
+        pos++;
+    }
     for(int i = pos; i < str.length(); ++i)
     {
         if(!_is_digit(str[i]) && str[i] != '.') break;
