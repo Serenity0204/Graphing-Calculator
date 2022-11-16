@@ -261,7 +261,8 @@ T& _at(node<T>* head, int pos)
 template <typename T>
 node<T>* _last_node(node<T>* head)
 {
-    if(head->_next == nullptr || head == nullptr) return head;
+    if(head == nullptr) return head;
+    if(head->_next == nullptr) return head;
     return _last_node<T>(head->_next);
 }
 

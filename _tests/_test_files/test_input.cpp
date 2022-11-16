@@ -25,61 +25,31 @@ bool test_stub(bool debug=false)
 //------------------------------------------------------------------------------
 //@TODO: add more test functions here:
 
-bool test_isNumber1(bool debug=false)
-{
-  string num = "XXX123.555X123";
-  string temp = "";
-  vector<string> res;
-  int pos = 0;
-  bool is_error = false;
-  while(pos < num.length())
-  {
-    if(_is_number(num, pos, temp, is_error))
-    {
-      pos += temp.length();
-      res.push_back(temp);
-      continue;
-    }
-    pos++;
-  }
-  if(res[0] != "123.555") return false;
-  if(res[1] != "123") return false;
-
-  return true;
-}
-
-bool test_isNumber2(bool debug=false)
-{
-  string num = "XXX123.X123";
-  int pos = 0;
-  string temp = "";
-  bool is_error = false;
-  while(pos < num.length())
-  {
-    if(_is_number(num, pos, temp, is_error))
-    {
-      pos += temp.length();
-      continue;
-    }
-    pos++;
-    if(is_error) return true;
-  }
-
-
-  return false;
-}
-
 
 
 bool test_tokenize1(bool debug=false)
 {
-  string num = "123.55+6.5";
-  Queue<string> q;
+  string num = "5x^2+(-6.59-sinx)*cosx";
+  Queue<string> tokens;
   bool error = false;
-  _tokenize(num, q, error);
-  cout << q << endl;
+  Queue<int> types = _tokenize(num, tokens, error);
+  cout << tokens << endl;
+  cout << types << endl;
   return true;
 }
+
+
+bool test_tokenize2(bool debug=false)
+{
+  string num = "6x^2^2+(9+x^3)^9";
+  Queue<string> tokens;
+  bool error = false;
+  Queue<int> types = _tokenize(num, tokens, error);
+  cout << tokens << endl;
+  cout << types << endl;
+  return true;
+}
+
 
 
 //------------------------------------------------------------------------------
@@ -94,21 +64,17 @@ TEST(TEST_STUB, TestStub)
   EXPECT_EQ(success, true);
 }
 
-TEST(TEST_IS_NUMBER, TestIsNumber1)
-{
-  bool success = test_isNumber1(debug);
-  EXPECT_EQ(success, true);
-}
 
-TEST(TEST_IS_NUMBER, TestIsNumber2)
-{
-  bool success = test_isNumber2(debug);
-  EXPECT_EQ(success, true);
-}
 
 TEST(TEST_TOKENIZE, TestTokenize1)
 {
   bool success = test_tokenize1(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_TOKENIZE, TestTokenize2)
+{
+  bool success = test_tokenize2(debug);
   EXPECT_EQ(success, true);
 }
 

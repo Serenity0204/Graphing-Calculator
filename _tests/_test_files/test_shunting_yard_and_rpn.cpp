@@ -189,9 +189,6 @@ bool test_sy_edge_equal_precedence_operator_parentheses(bool debug = false)
 
 
 
-
-
-
 //------------------------------------------------------------------------------
 
 
@@ -203,8 +200,6 @@ TEST(TEST_STUB, TestStub)
   bool success = test_stub(debug);
   EXPECT_EQ(success, true);
 }
-
-
 
 
 //------------------------------------------------------------------------------

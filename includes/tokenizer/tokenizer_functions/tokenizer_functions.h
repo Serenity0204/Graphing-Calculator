@@ -16,19 +16,19 @@ using namespace std;
 // function declaration
 
 // get a queue of string of tokenized data
-void _tokenize(string input,Queue<string>& tokens, bool& error);
+Queue<int> _tokenize(string input, Queue<string>& tokens, bool& error);
 
 // get a token at a certain index of input string
 
 
-void _get_token(string input, int& index, string& token, bool& error);
+void _get_token(string input, int& index, string& token, int& token_type, int previous_type, bool& error);
 
 
 // validators
 bool _is_operator(string input, int pos, string& op);
 bool _is_left_paren(string input, int pos, string& left_paren);
 bool _is_right_paren(string input, int pos, string& right_paren);
-bool _is_function(string str, int pos, string& func);
+bool _is_function(string str, int pos, string& func, bool& error);
 bool _is_digit(char c);
 bool _is_number(string str, int pos, string& number, bool& is_error);
 

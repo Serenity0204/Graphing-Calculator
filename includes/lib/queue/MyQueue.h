@@ -170,6 +170,7 @@ void Queue<T>::push(T item)
   if(this->empty()) 
   {
     this->_front = _insert_head(this->_front, item);
+    this->_rear = this->_front;
     return;
   }
   this->_rear = _insert_after<T>(this->_front, _last_node<T>(this->_front), item);
