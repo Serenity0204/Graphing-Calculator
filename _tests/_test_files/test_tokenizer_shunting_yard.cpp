@@ -42,8 +42,14 @@ bool test_tokenize_to_sy1(bool debug=false)
   Queue<Token*> infix_q = tokenizer.infix();
   ShuntingYard sy(infix_q);
   Queue<Token*> postfix = sy.postfix();
-  cout << "infix: " << infix_q << endl;
-  cout << "postfix: " << postfix << endl;
+  if(debug)
+  {
+    cout << "infix: " << infix_q << endl;
+    cout << "postfix: " << postfix << endl;
+  }
+  RPN rpn(postfix);
+  double val = rpn();
+  if(val != 30) return false;
   return true;
 }
 
@@ -51,15 +57,30 @@ bool test_tokenize_to_sy1(bool debug=false)
 
 bool test_tokenize_to_sy2(bool debug=false)
 {
-  string num = "2 - ( 2 + 2 ) ^ 2 * 2";
+  string num = "2 * ( 2 + 27 / ( 5 - 3 * 4 / 6 ) ^ 2 )";
   Tokenizer tokenizer(num);
   Queue<Token*> infix_q = tokenizer.infix();
   ShuntingYard sy(infix_q);
   Queue<Token*> postfix = sy.postfix();
-  cout << "infix: " << infix_q << endl;
-  cout << "postfix: " << postfix << endl;
+  if(debug)
+  {
+    cout << "infix: " << infix_q << endl;
+    cout << "postfix: " << postfix << endl;
+  }
+  RPN rpn(postfix);
+  double val = rpn();
+  if(val != 10) return false;
   return true;
 }
+
+
+
+bool test_sy_function1(bool debug)
+{
+  return true;
+}
+
+
 
 //------------------------------------------------------------------------------
 

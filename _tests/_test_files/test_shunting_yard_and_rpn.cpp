@@ -92,7 +92,7 @@ bool test_sy_edge_equal_precedence_operator_left_associative(bool debug = false)
   postfix = sy.postfix();
   if(debug)
   {
-    cout << "3 + 3 * 3 ^ 3 / 3: " << postfix << endl;
+    cout << "3 + 3 * 3 / 3: " << postfix << endl;
     cout << "should be: " << "3 3 3 * 3 / + " << endl;
   }
 
@@ -142,8 +142,7 @@ bool test_sy_edge_equal_precedence_operator_right_associative(bool debug = false
 
 }
 
-// 2 - ( 2 + 2 ) ^ 2 * 2
-// 2 2 2 + 2 ^ 2 * -
+
 
 // testing equal precedence operator and but with parentheses
 bool test_sy_edge_equal_precedence_operator_parentheses(bool debug = false)
@@ -229,6 +228,10 @@ bool test_sy_edge_paren(bool debug = false)
   return true;
 
 }
+
+
+
+
 
 
 
