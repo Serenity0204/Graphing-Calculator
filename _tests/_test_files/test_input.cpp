@@ -61,6 +61,19 @@ bool test_tokenize3(bool debug=false)
   return true;
 }
 
+bool test_tokenize4(bool debug=false)
+{
+  string num = " 0 - ( -max(-x + 6, -9   ) * -sin(x^-2) )";
+  Queue<string> tokens;
+  bool error = false;
+  Queue<int> types = _tokenize(num, tokens, error);
+  cout << tokens << endl;
+  if(types.size() != tokens.size()) return false;
+  return true;
+}
+
+
+
 //------------------------------------------------------------------------------
 
 
@@ -92,6 +105,13 @@ TEST(TEST_TOKENIZER, TestTokenize3)
   bool success = test_tokenize3(debug);
   EXPECT_EQ(success, true);
 }
+
+TEST(TEST_TOKENIZER, TestTokenize4)
+{
+  bool success = test_tokenize4(debug);
+  EXPECT_EQ(success, true);
+}
+
 //------------------------------------------------------------------------------
 //@TODO: add more test sets to call test functions here:
 

@@ -183,6 +183,8 @@ bool _is_function(string str, int pos, string& func, bool& error)
         return true;
     }
 
+
+
     if(str.substr(pos, 3) == "sin")
     {
         func += "sin";
