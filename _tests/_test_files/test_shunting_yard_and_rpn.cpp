@@ -188,7 +188,7 @@ bool test_sy_edge_equal_precedence_operator_parentheses(bool debug = false)
 
 bool test_sy_edge_paren(bool debug = false)
 {
-  // queue input: 2 * ( 2 + 6 / ( 5 - 3 * 4 / 6 ) ^ 2 )
+   // queue input: 2 * ( 2 + 27 / ( 5 - 3 * 4 / 6 ) ^ 2 ) = 10
   Queue<Token*> postfix;
   Queue<Token*> infix2;
   Queue<Token*> infix_q;
@@ -197,7 +197,7 @@ bool test_sy_edge_paren(bool debug = false)
   infix2.push(new LeftParen());
   infix2.push(new Integer(2));
   infix2.push(new Operator("+"));
-  infix2.push(new Integer(6));
+  infix2.push(new Integer(27));
   infix2.push(new Operator("/"));
   infix2.push(new LeftParen());
   infix2.push(new Integer(5));
@@ -211,6 +211,7 @@ bool test_sy_edge_paren(bool debug = false)
   infix2.push(new Operator("^"));
   infix2.push(new Integer(2));
   infix2.push(new RightParen());
+
   
   infix_q = infix2;
   ShuntingYard sy(infix_q);
@@ -218,14 +219,13 @@ bool test_sy_edge_paren(bool debug = false)
   postfix = sy.postfix();
   if(debug)
   {
-    cout << "2 * ( 2 + 6 / ( 5 - 3 * 4 / 6 ) ^ 2 ) : " << postfix << endl;
-    cout << "should be: " << "2 2 6 5 3 4 * 6 / - 2 ^ / + * " << endl;
+    cout << "2 * ( 2 + 27 / ( 5 - 3 * 4 / 6 ) ^ 2 ) : " << postfix << endl;
+    cout << "should be: " << "2 2 27 5 3 4 * 6 / - 2 ^ / + * " << endl;
   }
   
   RPN rpn(postfix);
   double val = rpn.rpn();
-  val = std::ceil(val * 100.0) / 100.0;
-  if(val != 5.34) return false;
+  if(val != 10) return false;
   return true;
 
 }
