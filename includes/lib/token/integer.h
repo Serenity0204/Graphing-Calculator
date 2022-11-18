@@ -11,9 +11,9 @@ using namespace std;
 class Integer : public Token
 {
 private:
-    int _integer;
+    double _integer;
 public:
-    Integer(int num);
+    Integer(double num);
     ~Integer();
     const int tokenType() const override;
     const int get_integer() const;

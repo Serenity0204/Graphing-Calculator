@@ -1,6 +1,6 @@
 #include "integer.h"
 
-Integer::Integer(int num)
+Integer::Integer(double num)
 {
     this->_integer = num;
 }
