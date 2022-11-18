@@ -21,7 +21,7 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
 bool _is_operator(string input, int pos, string& op);
 bool _is_left_paren(string input, int pos, string& left_paren);
 bool _is_right_paren(string input, int pos, string& right_paren);
-bool _is_function(string str, int pos, string& func, bool& error);
+bool _is_function(string str, int pos, string& func, int prev_type, bool& error);
 bool _is_digit(char c);
 bool _is_number(string str, int pos, string& number, int prev_type, bool& is_error);
 bool _is_unary_minus(string input, int pos, int prev_type);

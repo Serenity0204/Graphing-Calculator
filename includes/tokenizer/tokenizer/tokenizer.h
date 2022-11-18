@@ -57,28 +57,33 @@ public:
             {
                 double num_temp = stod(tk);
                 token = new Integer(num_temp);
+                infix.push(token);
                 continue;
             }
             if(type == FUNCTION)
             {
                 token = new Function(tk);
+                infix.push(token);
                 continue;
             }
             if(type == LPAREN)
             {
                 token = new LeftParen();
+                infix.push(token);
                 continue;
             }
 
             if(type == RPAREN)
             {
                 token = new RightParen();
+                infix.push(token);
                 continue;
             }
 
             if(type == OPERATOR)
             {
                 token = new Operator(tk);
+                infix.push(token);
                 continue;
             }
             

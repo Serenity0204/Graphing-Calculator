@@ -67,7 +67,10 @@ ADD_EXECUTABLE(test_shunting_yard_and_rpn
     ${SOURCE_FILES}
 )
 
-
+ADD_EXECUTABLE(test_tokenizer_shunting_yard
+    _tests/_test_files/test_tokenizer_shunting_yard.cpp
+    ${SOURCE_FILES}
+)
 
 ADD_EXECUTABLE(test_input
     _tests/_test_files/test_input.cpp
@@ -79,6 +82,7 @@ ADD_EXECUTABLE(test_input
 
 TARGET_LINK_LIBRARIES(test_shunting_yard_and_rpn gtest)
 TARGET_LINK_LIBRARIES(test_input gtest)
+TARGET_LINK_LIBRARIES(test_tokenizer_shunting_yard gtest)
 
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
@@ -89,8 +93,6 @@ find_package(SFML REQUIRED system window graphics network audio)
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(main ${SFML_LIBRARIES})
-    target_link_libraries(test_shunting_yard_and_rpn ${SFML_LIBRARIES})
-    target_link_libraries(test_input ${SFML_LIBRARIES})
 endif()
 
 

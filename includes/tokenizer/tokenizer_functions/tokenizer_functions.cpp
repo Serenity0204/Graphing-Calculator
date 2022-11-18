@@ -20,9 +20,12 @@ Queue<int> _tokenize(string input, Queue<string>& tokens, bool& error)
             index++;
             continue;
         }
+        int idx_hold = index;
         int prev_type = (!token_types.empty()) ? token_types.back() : -1;
         _get_token(input, index, token, token_type, prev_type, error);
+
         if(error) break;
+
         tokens.push(token);
         token_types.push(token_type);
     }
@@ -41,6 +44,19 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
 
     bool is_num = _is_number(input, index, tk5, previous_type, error);
     if(error) return;
+
+
+    bool is_func = _is_function(input, index, tk4, previous_type, error);
+    if(is_func) 
+    {
+        token = tk4;
+        //cout <<"token is: " <<token << " and length is: "<< token.length()<< endl;
+        index += token.length();
+        token_type = FUNCTION;
+        return;
+    }
+
+
     if(is_num) 
     {
         token = tk5;
@@ -50,15 +66,6 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
         return;
     }
 
-    bool is_func = _is_function(input, index, tk4, error);
-    if(is_func) 
-    {
-        token = tk4;
-        //cout <<"token is: " <<token << " and length is: "<< token.length()<< endl;
-        index += token.length();
-        token_type = FUNCTION;
-        return;
-    }
 
     bool is_lp = _is_left_paren(input, index, tk2);
     if(is_lp)
@@ -167,15 +174,16 @@ bool _is_right_paren(string input, int pos, string& right_paren)
 
 
 // check if at a certain position has a function token
-bool _is_function(string str, int pos, string& func, bool& error)
+bool _is_function(string str, int pos, string& func, int prev_type, bool& error)
 {
-    if(pos == str.length() - 2)
-    {
-        error = true;
-        return false;
-    }
+
     func = "";
 
+    if(_is_unary_minus(str, pos, prev_type))
+    {
+        func += "-";
+        pos++;
+    }
 
     if(str.substr(pos, 3) == "max")
     {
