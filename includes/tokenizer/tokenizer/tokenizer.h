@@ -57,21 +57,21 @@ public:
             {
                 double num_temp = stod(tk);
                 token = new Integer(num_temp);
-                cout << token << " is an integer" << endl;
+                //cout << token << " is an integer" << endl;
                 infix.push(token);
                 continue;
             }
             if(type == FUNCTION)
             {
                 token = new Function(tk);
-                cout << token << " is a function" << endl;
+                //cout << token << " is a function" << endl;
                 infix.push(token);
                 continue;
             }
             if(type == LPAREN)
             {
                 token = new LeftParen();
-                cout << token << " is a Left Paren" << endl;
+                //cout << token << " is a Left Paren" << endl;
                 infix.push(token);
                 continue;
             }
@@ -79,7 +79,7 @@ public:
             if(type == RPAREN)
             {
                 token = new RightParen();
-                cout << token << " is a Right Paren" << endl;
+                //cout << token << " is a Right Paren" << endl;
                 infix.push(token);
                 continue;
             }
@@ -87,7 +87,7 @@ public:
             if(type == OPERATOR)
             {
                 token = new Operator(tk);
-                cout << token << " is an Operator" << endl;
+                //cout << token << " is an Operator" << endl;
                 infix.push(token);
                 continue;
             }
