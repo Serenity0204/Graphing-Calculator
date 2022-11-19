@@ -41,8 +41,9 @@ int main()
 
     //stack + ^
     // queue sin(x) 2 ^ cos(x)  2 ^ +
-    string func = "(sin(x))^2 + (cos(x))^2";
-    func = "sin(x)  * ln(x) * log(x)";
+    string func = "(sin(x))^2 + (cos(x)^2";
+    //cin >> func;
+    //func = "-1 * x * -1";
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();
     cout << infix << endl;

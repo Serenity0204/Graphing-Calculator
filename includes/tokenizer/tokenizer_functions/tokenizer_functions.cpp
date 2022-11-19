@@ -46,7 +46,7 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
     if(error) return;
 
 
-    bool is_func = _is_function(input, index, tk4, previous_type, error);
+    bool is_func = _is_function(input, index, tk4, error);
     if(is_func) 
     {
         token = tk4;
@@ -174,16 +174,10 @@ bool _is_right_paren(string input, int pos, string& right_paren)
 
 
 // check if at a certain position has a function token
-bool _is_function(string str, int pos, string& func, int prev_type, bool& error)
+bool _is_function(string str, int pos, string& func, bool& error)
 {
 
     func = "";
-
-    if(_is_unary_minus(str, pos, prev_type))
-    {
-        func += "-";
-        pos++;
-    }
 
     // if(str.substr(pos, 3) == "max()")
     // {
