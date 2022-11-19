@@ -189,6 +189,7 @@ void Queue<T>::push(T item)
 template<typename T>
 T Queue<T>::pop()
 {
+  assert(this->_front != nullptr && "Popping from empty queue");
   if(this->_size > 0) this->_size--;
   return _delete_node<T>(this->_front, this->_front);
 }
@@ -222,7 +223,7 @@ bool Queue<T>::empty()
 template<typename T>
 T Queue<T>::front()
 {
-  if(this->empty()) return T();
+  assert(!this->empty() && "dereference empty queue");
   Iterator it(this->_front);
   return *it;
 }
@@ -230,7 +231,7 @@ T Queue<T>::front()
 template<typename T>
 T Queue<T>::back()
 {
-  if(this->empty()) return T();
+  assert(!this->empty() && "dereference empty queue");
   Iterator it(this->_rear);
   return *it;
 }
@@ -239,6 +240,11 @@ template<typename U>
 ostream& operator <<(ostream& outs, const Queue<U>& printMe)
 {
     typename Queue<U>::Iterator it;
+    if(it.is_null())
+    {
+      outs << "Empty Queue";
+      return outs;
+    }
     for(it = printMe.begin(); it != printMe.end(); it++)
     {
         outs << "[" << *it << "]->"; 

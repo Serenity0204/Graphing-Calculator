@@ -6,14 +6,14 @@ ShuntingYard::ShuntingYard(){}
 ShuntingYard::ShuntingYard(const Queue<Token*>& input_q)
 {
     this->_queue = input_q;
-    this->_error = false;
+    this->_error = this->_queue.empty() ? true : false;
 }
   
 
 void ShuntingYard::infix(const Queue<Token*>& input_q)
 {
     this->_queue = input_q;
-    this->_error = false;
+    this->_error = this->_queue.empty() ? true : false;
 }
   
 // generate postfix queue from infix queue
@@ -36,6 +36,12 @@ Queue<Token*> ShuntingYard::shunting_yard()
     Queue<Token*> input_queue = this->_queue;
     Queue<Token*> output_queue;
     Stack<Token*> operator_stack;
+    if(input_queue.empty())
+    {
+        this->_error = true;
+        return output_queue;
+    }
+
     while(!input_queue.empty())
     {
         Token* token = input_queue.pop();
@@ -61,8 +67,9 @@ Queue<Token*> ShuntingYard::shunting_yard()
         if(token->tokenType() == RPAREN)
         {
             //cout << "RightParen" << endl;
-            while(operator_stack.top()->tokenType() != LPAREN)
+            while(!operator_stack.empty())
             {
+                if(operator_stack.top()->tokenType() == LPAREN) break;
                 if(operator_stack.empty()) 
                 {
                     this->_error = true;
@@ -71,12 +78,18 @@ Queue<Token*> ShuntingYard::shunting_yard()
                 Token* tk = operator_stack.pop();
                 output_queue.push(tk);
             }
-            if(operator_stack.top()->tokenType() != LPAREN) 
+            if(!operator_stack.empty() && operator_stack.top()->tokenType() != LPAREN) 
+            {
+                this->_error = true;
+                return output_queue;
+            }
+            if(operator_stack.empty())
             {
                 this->_error = true;
                 return output_queue;
             }
             operator_stack.pop();
+
             if(!operator_stack.empty() && operator_stack.top()->tokenType() == FUNCTION)
             {
                 Token* tk = operator_stack.pop();

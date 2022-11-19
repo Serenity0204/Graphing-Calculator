@@ -39,14 +39,25 @@ int main()
     sf::VertexArray function(sf::LinesStrip, 100);
     function.clear();
 
-    //stack + ^
-    // queue sin(x) 2 ^ cos(x)  2 ^ +
-    string func = "(x^2 ))";
-    //cin >> func;
-    //func = "-1 * x * -1";
+
+    string func = "x^((sin(x))^2 + (cos(x))^2 + 1)";
+    //func = "";
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();
-    cout << infix << endl;
+    
+    
+    if(infix.empty()) 
+    {
+        cout << infix << endl;
+        return -1;
+    }
+    // Queue<Token*>infix;
+    // infix.push(new LeftParen());
+    // infix.push(new Function("x"));
+    // infix.push(new Operator("^"));
+    // infix.push(new Integer(2));
+    // infix.push(new RightParen());
+    // infix.push(new RightParen());
     //Queue<Token*> infix;
     // infix.push(new Function("sin(x)"));
     // infix.push(new Integer(2));
@@ -55,15 +66,15 @@ int main()
     // infix.push(new Integer(2));
     // infix.push(new Operator("^"));
     // infix.push(new Operator("+"));
-    ShuntingYard sy(infix);
     
+    ShuntingYard sy(infix);
     Queue<Token*> postfix = sy.postfix();
     if(sy.is_error())
     {
         cout << "error in shunting yard!";
         return -1;
     }
-    //cout << postfix << endl;
+    // //cout << postfix << endl;
     RPN rpn(postfix);
 
     for(float x = -30; x < 30; x+=0.25)

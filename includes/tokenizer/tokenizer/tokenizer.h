@@ -31,12 +31,12 @@ public:
     Tokenizer(string input)
     {
         this->_input = input;
-        this->tokenize(this->_input);
+        if(this->_input != "") this->tokenize(this->_input);
     }
     void set_input(string input)
     {
         this->_input = input;
-        this->tokenize(this->_input);
+        if(this->_input != "") this->tokenize(this->_input);
     }
     Queue<Token*> infix()
     {

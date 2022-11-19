@@ -159,6 +159,7 @@ void Stack<T>::push(T item)
 template<typename T>
 T Stack<T>::pop()
 {
+  assert(this->_top != nullptr && "Popping empty stack");
   if(this->_size > 0) this->_size--;
   return _delete_node<T>(this->_top, this->_top);
 }
@@ -203,6 +204,7 @@ bool Stack<T>::empty()
 template<typename T>
 T Stack<T>::top()
 {
+  assert(this->_top != nullptr && "Dereferencing empty stack");
   if(this->empty()) return T();
   return this->_top->_item;
 }
@@ -211,6 +213,11 @@ template<typename U>
 ostream& operator <<(ostream& outs, const Stack<U>& printMe)
 {
     typename Stack<U>::Iterator it;
+    if(it.is_null())
+    {
+      outs << "Empty Stack";
+      return outs;
+    }
     for(it = printMe.begin(); it != printMe.end(); it++)
     {
         outs << "[" << *it << "]->"; 
