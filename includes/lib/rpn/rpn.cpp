@@ -30,9 +30,10 @@ double RPN::operator()(double value)
 double RPN::rpn(double value)
 {
     Stack<double> output;
-    while(!this->queue.empty())
+    Queue<Token*> queue_cache = this->queue;
+    while(!queue_cache.empty())
     {
-        Token* token = this->queue.pop();
+        Token* token = queue_cache.pop();
         if(token->tokenType() == INTEGER)
         {
             Integer* int_temp = static_cast<Integer*>(token);

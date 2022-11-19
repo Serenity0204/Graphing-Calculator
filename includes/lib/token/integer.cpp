@@ -12,7 +12,7 @@ const int Integer::tokenType() const
     return INTEGER;
 }
 
-const int Integer::get_integer() const
+const double Integer::get_integer() const
 {
     return this->_integer;
 }

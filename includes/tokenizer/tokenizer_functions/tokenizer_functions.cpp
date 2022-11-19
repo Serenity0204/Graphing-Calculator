@@ -185,82 +185,77 @@ bool _is_function(string str, int pos, string& func, int prev_type, bool& error)
         pos++;
     }
 
-    if(str.substr(pos, 3) == "max")
+    // if(str.substr(pos, 3) == "max()")
+    // {
+    //     func += "max";
+    //     return true;
+    // }
+
+
+
+    if(str.substr(pos, 6) == "sin(x)")
     {
-        func += "max";
-        return true;
-    }
-
-
-
-    if(str.substr(pos, 3) == "sin")
-    {
-        func += "sin";
+        func += "sin(x)";
         return true;   
     }
-    if(str.substr(pos, 3) == "cos")
+    if(str.substr(pos, 6) == "cos(x)")
     {
-        func += "cos";
-        return true;
-    }
-    if(str.substr(pos, 3) == "tan")
-    {
-        func += "tan";
+        func += "cos(x)";
         return true;
     }
     
-    if(str.substr(pos, 3) == "tan")
+    if(str.substr(pos, 6) == "tan(x)")
     {
-        func += "tan";
+        func += "tan(x)";
         return true;
     }
 
-    if(str.substr(pos, 6) == "arcsin")
+    if(str.substr(pos, 9) == "arcsin(x)")
     {
-        func += "arcsin";
+        func += "arcsin(x)";
         return true;
     }
     
 
-    if(str.substr(pos, 6) == "arccos")
+    if(str.substr(pos, 9) == "arccos(x)")
     {
-        func += "arccos";
+        func += "arccos(x)";
         return true;
     }
 
-    if(str.substr(pos, 6) == "arctan")
+    if(str.substr(pos, 9) == "arctan(x)")
     {
-        func += "arctan";
+        func += "arctan(x)";
         return true;
     }
     
-    if(str.substr(pos, 4) == "sinh")
+    if(str.substr(pos, 7) == "sinh(x)")
     {
-        func += "sinh";
+        func += "sinh(x)";
         return true;
     }
     
-    if(str.substr(pos, 4) == "cosh")
+    if(str.substr(pos, 7) == "cosh(x)")
     {
-        func += "cosh";
+        func += "cosh(x)";
         return true;
     }
     
-    if(str.substr(pos, 4) == "tanh")
+    if(str.substr(pos, 7) == "tanh(x)")
     {
-        func += "tanh";
+        func += "tanh(x)";
         return true;
     }
     
-    if(str.substr(pos, 2) == "ln")
+    if(str.substr(pos, 5) == "ln(x)")
     {
-        func += "ln";
+        func += "ln(x)";
         return true;
     }
     
-    if(str.substr(pos, 3) == "log")
+    if(str.substr(pos, 6) == "log(x)")
     {
-        func += "log";
+        func += "log(x)";
         return true;
     }
     if(str.substr(pos, 1) == "x")

@@ -16,7 +16,7 @@ public:
     Integer(double num);
     ~Integer();
     const int tokenType() const override;
-    const int get_integer() const;
+    const double get_integer() const;
     void Print(ostream &outs) const override;
     friend ostream& operator <<(ostream &outs, const Integer &num);
     friend ostream& operator <<(ostream& outs, const Integer* num);

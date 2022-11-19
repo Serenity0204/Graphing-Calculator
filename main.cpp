@@ -1,5 +1,13 @@
 #include <bits/stdc++.h>
 #include <SFML/Graphics.hpp>
+#include "includes/tokenizer/tokenizer/tokenizer.h"
+#include "includes/lib/rpn/rpn.h"
+#include "includes/lib/shunting_yard/shunting_yard.h"
+#include "includes/lib/queue/MyQueue.h"
+#include "includes/lib/token/function.h"
+#include "includes/lib/token/constants.h"
+#include "includes/lib/token/operator.h"
+#include "includes/lib/token/integer.h"
 using namespace std;
 
 
@@ -30,9 +38,34 @@ int main()
     // text.setStyle(sf::Text::Bold | sf::Text::Underlined);
     sf::VertexArray function(sf::LinesStrip, 100);
     function.clear();
+
+    //stack + ^
+    // queue sin(x) 2 ^ cos(x)  2 ^ +
+    string func = "(sin(x))^2 + (cos(x))^2";
+    func = "x";
+    Tokenizer tk(func);
+    Queue<Token*>infix = tk.infix();
+    cout << infix << endl;
+    //Queue<Token*> infix;
+    // infix.push(new Function("sin(x)"));
+    // infix.push(new Integer(2));
+    // infix.push(new Operator("^"));
+    // infix.push(new Function("cos(x)"));
+    // infix.push(new Integer(2));
+    // infix.push(new Operator("^"));
+    // infix.push(new Operator("+"));
+    ShuntingYard sy(infix);
+    
+    Queue<Token*> postfix = sy.postfix();
+    cout << postfix << endl;
+    RPN rpn(postfix);
+
     for(float x = -30; x < 30; x+=0.25)
-    {
-        function.append(sf::Vertex(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*sin(pow(x, 2))*20.f + window.getSize().y / 2)));
+    {   
+
+        float X = rpn.rpn(x);
+        //cout << X << endl;
+        function.append(sf::Vertex(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*X*20.f + window.getSize().y / 2)));
     }
     while (window.isOpen())
     {
