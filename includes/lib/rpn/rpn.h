@@ -23,7 +23,7 @@ public:
   ~RPN(){} 
   // save input_q to member variable queue
   void set_input(const Queue<Token *> &input_q);
-
+  bool is_error(){return this->_error;}
   // return result from member variable queue
   double operator()(double value = 0);
   // called by operator ()
@@ -35,7 +35,7 @@ private:
 
   // private member vars
   bool _error;
-  Queue<Token*> queue;
+  Queue<Token*> _queue;
 };
 
 #endif //RPN_H

@@ -4,10 +4,9 @@
 
 
 
-Queue<int> _tokenize(string input, Queue<string>& tokens, bool& error)
+Queue<int> _tokenize(string input, Queue<string>& tokens)
 {
     int index = 0;  
-    error = false;
     Queue<int> token_types;
     while(index < input.length())
     {   
@@ -22,9 +21,9 @@ Queue<int> _tokenize(string input, Queue<string>& tokens, bool& error)
         }
         int idx_hold = index;
         int prev_type = (!token_types.empty()) ? token_types.back() : -1;
-        _get_token(input, index, token, token_type, prev_type, error);
+        _get_token(input, index, token, token_type, prev_type);
 
-        if(error) break;
+        
 
         tokens.push(token);
         token_types.push(token_type);
@@ -35,18 +34,13 @@ Queue<int> _tokenize(string input, Queue<string>& tokens, bool& error)
 
 
 
-void _get_token(string input, int& index, string& token, int& token_type, int previous_type, bool& error)
+void _get_token(string input, int& index, string& token, int& token_type, int previous_type)
 {
     token = "";
     string tk1, tk2, tk3, tk4, tk5, tk6;
 
 
-
-    bool is_num = _is_number(input, index, tk5, previous_type, error);
-    if(error) return;
-
-
-    bool is_func = _is_function(input, index, tk4, error);
+    bool is_func = _is_function(input, index, tk4);
     if(is_func) 
     {
         token = tk4;
@@ -56,7 +50,7 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
         return;
     }
 
-
+    bool is_num = _is_number(input, index, tk5, previous_type);
     if(is_num) 
     {
         token = tk5;
@@ -99,12 +93,6 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
         return;
     }
 
-
-    if(token.length() == 0)
-    {
-        error = true;
-        return;
-    }
 }
 
 
@@ -174,7 +162,7 @@ bool _is_right_paren(string input, int pos, string& right_paren)
 
 
 // check if at a certain position has a function token
-bool _is_function(string str, int pos, string& func, bool& error)
+bool _is_function(string str, int pos, string& func)
 {
 
     func = "";
@@ -281,7 +269,7 @@ bool _is_unary_minus(string input, int pos, int prev_type)
 
 
 // check if it's number or not
-bool _is_number(string str, int pos, string& number, int prev_type, bool& is_error)
+bool _is_number(string str, int pos, string& number, int prev_type)
 {
 
     if(!_is_digit(str[pos]) && !_is_unary_minus(str, pos, prev_type)) return false;
@@ -300,7 +288,7 @@ bool _is_number(string str, int pos, string& number, int prev_type, bool& is_err
         number += str[i];
         pos++;
     }
-    if(number[number.length() - 1] == '.') is_error = true;
+    
         
     return true;
 }

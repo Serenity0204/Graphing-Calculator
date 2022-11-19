@@ -24,14 +24,15 @@ public:
   
   // save input_q to member variable queue
   void infix(const Queue<Token*>& input_q);
-  
+  bool is_error(){return this->_error;}
   // generate postfix queue from infix queue
   Queue<Token*> postfix();
   Queue<Token*> postfix(const Queue<Token*>& input_q);
   // called by postfix() 
   Queue<Token*> shunting_yard();
 private:
-  Queue<Token*> queue;
+  Queue<Token*> _queue;
+  bool _error;
 };
 
 #endif //SHUNTING_YARD_H

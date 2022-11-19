@@ -14,40 +14,33 @@
 class Tokenizer
 {
 private:
-    // state var
-    bool _error;
     // holders
     Queue<string> _tokens;
     Queue<int> _types;
     // input
     string _input;
-    
-    // output queue infix
-    Queue<Token*> output;
+
     // private helper
     void tokenize(string input)
     {
         this->_tokens.clear();
         this->_input.clear();
-        this->_types = _tokenize(input, this->_tokens, this->_error);
+        this->_types = _tokenize(input, this->_tokens);
     }
 public:
     Tokenizer(string input)
     {
         this->_input = input;
-        this->_error = false;
         this->tokenize(this->_input);
     }
     void set_input(string input)
     {
         this->_input = input;
-        this->_error = false;
         this->tokenize(this->_input);
     }
     Queue<Token*> infix()
     {
         Queue<Token*> infix;
-        if(this->_error) return infix;
         while(!this->_tokens.empty())
         {
             string tk = this->_tokens.pop();

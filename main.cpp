@@ -41,7 +41,7 @@ int main()
 
     //stack + ^
     // queue sin(x) 2 ^ cos(x)  2 ^ +
-    string func = "(sin(x))^2 + (cos(x)^2";
+    string func = "(x^2 ))";
     //cin >> func;
     //func = "-1 * x * -1";
     Tokenizer tk(func);
@@ -58,13 +58,23 @@ int main()
     ShuntingYard sy(infix);
     
     Queue<Token*> postfix = sy.postfix();
-    cout << postfix << endl;
+    if(sy.is_error())
+    {
+        cout << "error in shunting yard!";
+        return -1;
+    }
+    //cout << postfix << endl;
     RPN rpn(postfix);
 
     for(float x = -30; x < 30; x+=0.25)
     {   
 
         float X = rpn.rpn(x);
+        if(rpn.is_error())
+        {
+            cout << "Error in rpn! " << endl;
+            return -1;
+        }
         //cout << X << endl;
         function.append(sf::Vertex(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*X*20.f + window.getSize().y / 2)));
     }

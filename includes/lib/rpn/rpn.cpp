@@ -9,14 +9,14 @@ RPN::RPN()
 RPN::RPN(const Queue<Token*>& input_q)
 {
     this->_error = false;
-    this->queue = input_q;
+    this->_queue = input_q;
 }
 
   
 // save input_q to member variable queue
 void RPN::set_input(const Queue<Token *> &input_q)
 {
-    this->queue = input_q;
+    this->_queue = input_q;
 }
 
 
@@ -30,7 +30,7 @@ double RPN::operator()(double value)
 double RPN::rpn(double value)
 {
     Stack<double> output;
-    Queue<Token*> queue_cache = this->queue;
+    Queue<Token*> queue_cache = this->_queue;
     while(!queue_cache.empty())
     {
         Token* token = queue_cache.pop();
@@ -43,7 +43,11 @@ double RPN::rpn(double value)
         }
         if(token->tokenType() == OPERATOR)
         {
-            if(output.size() < OPERATOR_NUM_NEEDED) this->_error = true;
+            if(output.size() < OPERATOR_NUM_NEEDED) 
+            {
+                this->_error = true;
+                return -1;
+            }
             double secondNum = output.pop();
             double firstNum = output.pop();
             Operator* operator_temp = static_cast<Operator*>(token);
@@ -59,7 +63,11 @@ double RPN::rpn(double value)
             continue;
         }
     }
-    if(output.size() != 1) this->_error = true;
+    if(output.size() != 1) 
+    {
+        this->_error = true;
+        return -1;
+    }
     return output.top();
 }
 
