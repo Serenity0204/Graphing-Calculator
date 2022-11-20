@@ -24,7 +24,12 @@ Queue<int> _tokenize(string input, Queue<string>& tokens)
         _get_token(input, index, token, token_type, prev_type);
 
         
-
+        if(token == "")
+        {
+            tokens.clear();
+            token_types.clear();
+            return token_types;
+        }
         tokens.push(token);
         token_types.push(token_type);
     }

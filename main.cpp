@@ -40,11 +40,11 @@ int main()
     function.clear();
 
 
-    string func = "x^((sin(x))^2 + (cos(x))^2 + 1)";
-    //func = "";
+    string func = "x^((sin(x))^2 + (cos(x))^2 + tan(x))";
+    //func = "ln(x)^2";
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();
-    
+
     
     if(infix.empty()) 
     {
@@ -77,7 +77,7 @@ int main()
     // //cout << postfix << endl;
     RPN rpn(postfix);
 
-    for(float x = -30; x < 30; x+=0.25)
+    for(float x = -50; x < 50; x+=0.01)
     {   
 
         float X = rpn.rpn(x);

@@ -84,7 +84,6 @@ public:
                 infix.push(token);
                 continue;
             }
-            
         }
         
         
