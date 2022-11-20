@@ -17,9 +17,16 @@ void Tokenizer::set_input(string input)
     if(this->_input != "") this->tokenize(this->_input);
 }
 
+
+Tokenizer::~Tokenizer()
+{
+    this->_output.clear();
+}
+
 Queue<Token*> Tokenizer::infix()
 {
     Queue<Token*> infix;
+    this->_output = infix;
     while(!this->_tokens.empty())
     {
         string tk = this->_tokens.pop();
@@ -30,21 +37,21 @@ Queue<Token*> Tokenizer::infix()
             double num_temp = stod(tk);
             token = new Integer(num_temp);
             //cout << token << " is an integer" << endl;
-            infix.push(token);
+            this->_output.push(token);
             continue;
         }
         if(type == FUNCTION)
         {
             token = new Function(tk);
             //cout << token << " is a function" << endl;
-            infix.push(token);
+            this->_output.push(token);
             continue;
         }
         if(type == LPAREN)
         {
             token = new LeftParen();
             //cout << token << " is a Left Paren" << endl;
-            infix.push(token);
+            this->_output.push(token);
             continue;
         }
 
@@ -52,7 +59,7 @@ Queue<Token*> Tokenizer::infix()
         {
             token = new RightParen();
             //cout << token << " is a Right Paren" << endl;
-            infix.push(token);
+            this->_output.push(token);
             continue;
         }
 
@@ -60,11 +67,11 @@ Queue<Token*> Tokenizer::infix()
         {
             token = new Operator(tk);
             //cout << token << " is an Operator" << endl;
-            infix.push(token);
+            this->_output.push(token);
             continue;
         }
     }
+    
         
-        
-    return infix;
+    return this->_output;
 }

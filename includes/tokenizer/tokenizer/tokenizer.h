@@ -25,10 +25,13 @@ private:
     // input
     string _input;
 
+    // output
+    Queue<Token*> _output;
     // private helper
     void tokenize(string input);
 public:
     Tokenizer(string input);
+    ~Tokenizer();
     void set_input(string input);
     Queue<Token*> infix();
    
