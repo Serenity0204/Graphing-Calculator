@@ -19,13 +19,12 @@ class Config
 {
 private:
     sf::Texture* _textures;
-    int _texture_num;
     sf::Texture* _get_texture(int index);
     void _set_texture();
 public:
     Config();
     ~Config();
-    sf::Texture get_texture(int index);
+    sf::Texture& get_texture(int index);
 };
 
 
