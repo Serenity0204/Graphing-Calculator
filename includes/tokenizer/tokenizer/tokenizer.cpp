@@ -40,6 +40,12 @@ Queue<Token*> Tokenizer::infix()
             this->_output.push(token);
             continue;
         }
+        if(type == VAR)
+        {
+            token = new Variable();
+            this->_output.push(token);
+            continue;
+        }
         if(type == FUNCTION)
         {
             token = new Function(tk);

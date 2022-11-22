@@ -42,7 +42,7 @@ int main()
     function.clear();
 
 
-    string func = "x^((sin(x))^2 + (cos(x))^2 + tan(x))";
+    string func = "cos(x)";
     //func = "ln(x)^2";
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();

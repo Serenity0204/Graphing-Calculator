@@ -10,7 +10,7 @@
 #include "../../lib/token/leftparen.h"
 #include "../../lib/token/rightparen.h"
 #include "../tokenizer_functions/tokenizer_functions.h"
-
+#include "../../lib/token/variable.h"
 
 
 

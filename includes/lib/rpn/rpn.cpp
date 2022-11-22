@@ -41,6 +41,12 @@ double RPN::rpn(double value)
             output.push(val);
             continue;
         }
+        if(token->tokenType() == VAR)
+        {
+            double val = value;
+            output.push(val);
+            continue;
+        }
         if(token->tokenType() == OPERATOR)
         {
             if(output.size() < OPERATOR_NUM_NEEDED) 

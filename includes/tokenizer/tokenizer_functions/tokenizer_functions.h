@@ -25,7 +25,7 @@ bool _is_function(string str, int pos, string& func);
 bool _is_digit(char c);
 bool _is_number(string str, int pos, string& number, int prev_type);
 bool _is_unary_minus(string input, int pos, int prev_type);
-
+bool _is_variable(string str, int pos, string& var);
 #endif // !TOKENIZER_FUNCTIONS_H
 
 
