@@ -1,8 +1,6 @@
-# CPP_Template
-SFML C++ template
+# C++ sfml graphing calculator
 
-A sfml c++ template(including gtest)using cmake to build for personal usage.
-
+system:
 Windows:
   compiler: g++ 7.3.0
   cmake: 3.20.0
