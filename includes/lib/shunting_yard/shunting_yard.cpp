@@ -52,6 +52,11 @@ Queue<Token*> ShuntingYard::shunting_yard()
             output_queue.push(token);
             continue;
         }
+        if(token->tokenType() == VAR)
+        {
+            output_queue.push(token);
+            continue;
+        }
         if(token->tokenType() == FUNCTION)
         {
             //cout << "Function" << endl;

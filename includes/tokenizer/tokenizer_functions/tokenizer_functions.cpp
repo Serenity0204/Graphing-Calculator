@@ -54,6 +54,14 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
         token_type = FUNCTION;
         return;
     }
+    bool is_var = _is_variable(input, index, tk6);
+    if(is_var)
+    {
+        token = tk6;
+        index += token.length();
+        token_type = VAR;
+        return;
+    }
 
     bool is_num = _is_number(input, index, tk5, previous_type);
     if(is_num) 
@@ -164,7 +172,15 @@ bool _is_right_paren(string input, int pos, string& right_paren)
     return false;
 }
 
-
+bool _is_variable(string str, int pos, string& var)
+{
+    if(str[pos] == 'X' || str[pos] == 'x')
+    {
+        var = 'x';
+        return true;
+    }
+    return false;
+}
 
 // check if at a certain position has a function token
 bool _is_function(string str, int pos, string& func)
@@ -180,74 +196,69 @@ bool _is_function(string str, int pos, string& func)
 
 
 
-    if(str.substr(pos, 6) == "sin(x)")
+    if(str.substr(pos, 3) == "sin")
     {
-        func += "sin(x)";
+        func += "sin";
         return true;   
     }
-    if(str.substr(pos, 6) == "cos(x)")
+    if(str.substr(pos, 3) == "cos")
     {
-        func += "cos(x)";
+        func += "cos";
         return true;
     }
     
-    if(str.substr(pos, 6) == "tan(x)")
+    if(str.substr(pos, 3) == "tan")
     {
-        func += "tan(x)";
+        func += "tan";
         return true;
     }
 
-    if(str.substr(pos, 9) == "arcsin(x)")
+    if(str.substr(pos, 6) == "arcsin")
     {
-        func += "arcsin(x)";
+        func += "arcsin";
         return true;
     }
     
 
-    if(str.substr(pos, 9) == "arccos(x)")
+    if(str.substr(pos, 6) == "arccos")
     {
-        func += "arccos(x)";
+        func += "arccos";
         return true;
     }
 
-    if(str.substr(pos, 9) == "arctan(x)")
+    if(str.substr(pos, 6) == "arctan")
     {
-        func += "arctan(x)";
+        func += "arctan";
         return true;
     }
     
-    if(str.substr(pos, 7) == "sinh(x)")
+    if(str.substr(pos, 4) == "sinh")
     {
-        func += "sinh(x)";
+        func += "sinh";
         return true;
     }
     
-    if(str.substr(pos, 7) == "cosh(x)")
+    if(str.substr(pos, 4) == "cosh")
     {
-        func += "cosh(x)";
+        func += "cosh";
         return true;
     }
     
-    if(str.substr(pos, 7) == "tanh(x)")
+    if(str.substr(pos, 4) == "tanh")
     {
-        func += "tanh(x)";
+        func += "tanh";
         return true;
     }
     
-    if(str.substr(pos, 5) == "ln(x)")
+    if(str.substr(pos, 2) == "ln")
     {
-        func += "ln(x)";
+        func += "ln";
         return true;
     }
     
-    if(str.substr(pos, 6) == "log(x)")
+    if(str.substr(pos, 3) == "log")
     {
-        func += "log(x)";
-        return true;
-    }
-    if(str.substr(pos, 1) == "x")
-    {
-        func += "x";
+        func += "log";
         return true;
     }
     return false;
@@ -258,6 +269,7 @@ bool _is_function(string str, int pos, string& func)
 bool _is_digit(char c)
 {
     if(c <= 57 && c >= 48) return true;
+    //if(c == 'x' || c == 'X') return true;
     return false;
 }
 
@@ -281,6 +293,7 @@ bool _is_number(string str, int pos, string& number, int prev_type)
        
 
     number = "";
+ 
     if(str[pos] == '-')
     {
         number += str[pos];

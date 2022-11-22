@@ -29,10 +29,10 @@ bool test_stub(bool debug=false)
 
 bool test_tokenize1(bool debug=false)
 {
-  string num = "5x^2+(-6.59-sinx)*cosx";
+  string num = "sin(x^3) + 9*x^2";
   Queue<string> tokens;
   bool error = false;
-  Queue<int> types = _tokenize(num, tokens, error);
+  Queue<int> types = _tokenize(num, tokens);
   cout << tokens << endl;
   if(types.size() != tokens.size()) return false;
   return true;
@@ -41,10 +41,10 @@ bool test_tokenize1(bool debug=false)
 
 bool test_tokenize2(bool debug=false)
 {
-  string num = "6x^2^2+(9+x^3)^-9";
+  string num = "9 * x^9 + 6*arctan(x + 999)^3";
   Queue<string> tokens;
   bool error = false;
-  Queue<int> types = _tokenize(num, tokens, error);
+  Queue<int> types = _tokenize(num, tokens);
   cout << tokens << endl;
   if(types.size() != tokens.size()) return false;
   return true;
@@ -52,10 +52,10 @@ bool test_tokenize2(bool debug=false)
 
 bool test_tokenize3(bool debug=false)
 {
-  string num = "1 + 100 + max(x + 6, -9   ) + sin(x^-2)";
+  string num = "x^3 + 5 + x^ln(x + 3)";
   Queue<string> tokens;
   bool error = false;
-  Queue<int> types = _tokenize(num, tokens, error);
+  Queue<int> types = _tokenize(num, tokens);
   cout << tokens << endl;
   if(types.size() != tokens.size()) return false;
   return true;
@@ -63,10 +63,10 @@ bool test_tokenize3(bool debug=false)
 
 bool test_tokenize4(bool debug=false)
 {
-  string num = " 0 - ( -max(-x + 6, -9   ) * -sin(x^-2) )";
+  string num = "";
   Queue<string> tokens;
   bool error = false;
-  Queue<int> types = _tokenize(num, tokens, error);
+  Queue<int> types = _tokenize(num, tokens);
   cout << tokens << endl;
   if(types.size() != tokens.size()) return false;
   return true;

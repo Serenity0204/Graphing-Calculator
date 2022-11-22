@@ -8,8 +8,8 @@
 #include "includes/lib/token/constants.h"
 #include "includes/lib/token/operator.h"
 #include "includes/lib/token/integer.h"
-#include "includes/engine/engine.h"
-#include "includes/config/config.h"
+// #include "includes/engine/engine.h"
+// #include "includes/config/config.h"
 using namespace std;
 
 
@@ -42,7 +42,7 @@ int main()
     function.clear();
 
 
-    string func = "x^((sin(x))^2 + (cos(x))^2 + tan(x))";
+    string func = "x^500";
     //func = "ln(x)^2";
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();

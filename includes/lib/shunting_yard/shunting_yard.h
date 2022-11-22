@@ -12,6 +12,8 @@
 #include "../token/operator.h"
 #include "../token/leftparen.h"
 #include "../token/rightparen.h"
+#include "../token/variable.h"
+
 
 using namespace std;
 
