@@ -29,7 +29,7 @@ bool test_stub(bool debug=false)
 
 bool test_tokenize1(bool debug=false)
 {
-  string num = "1 + 5 + 9";
+  string num = "sin(x^3) + 9*x^2";
   Queue<string> tokens;
   bool error = false;
   Queue<int> types = _tokenize(num, tokens);
@@ -39,38 +39,38 @@ bool test_tokenize1(bool debug=false)
 }
 
 
-// bool test_tokenize2(bool debug=false)
-// {
-//   string num = "";
-//   Queue<string> tokens;
-//   bool error = false;
-//   Queue<int> types = _tokenize(num, tokens);
-//   cout << tokens << endl;
-//   if(types.size() != tokens.size()) return false;
-//   return true;
-// }
+bool test_tokenize2(bool debug=false)
+{
+  string num = "9 * x^9 + 6*arctan(x + 999)^3";
+  Queue<string> tokens;
+  bool error = false;
+  Queue<int> types = _tokenize(num, tokens);
+  cout << tokens << endl;
+  if(types.size() != tokens.size()) return false;
+  return true;
+}
 
-// bool test_tokenize3(bool debug=false)
-// {
-//   string num = "";
-//   Queue<string> tokens;
-//   bool error = false;
-//   Queue<int> types = _tokenize(num, tokens);
-//   cout << tokens << endl;
-//   if(types.size() != tokens.size()) return false;
-//   return true;
-// }
+bool test_tokenize3(bool debug=false)
+{
+  string num = "x^3 + 5 + x^ln(x + 3)";
+  Queue<string> tokens;
+  bool error = false;
+  Queue<int> types = _tokenize(num, tokens);
+  cout << tokens << endl;
+  if(types.size() != tokens.size()) return false;
+  return true;
+}
 
-// bool test_tokenize4(bool debug=false)
-// {
-//   string num = "";
-//   Queue<string> tokens;
-//   bool error = false;
-//   Queue<int> types = _tokenize(num, tokens);
-//   cout << tokens << endl;
-//   if(types.size() != tokens.size()) return false;
-//   return true;
-// }
+bool test_tokenize4(bool debug=false)
+{
+  string num = "";
+  Queue<string> tokens;
+  bool error = false;
+  Queue<int> types = _tokenize(num, tokens);
+  cout << tokens << endl;
+  if(types.size() != tokens.size()) return false;
+  return true;
+}
 
 
 
@@ -94,23 +94,23 @@ TEST(TEST_TOKENIZER, TestTokenize1)
   EXPECT_EQ(success, true);
 }
 
-// TEST(TEST_TOKENIZER, TestTokenize2)
-// {
-//   bool success = test_tokenize2(debug);
-//   EXPECT_EQ(success, true);
-// }
+TEST(TEST_TOKENIZER, TestTokenize2)
+{
+  bool success = test_tokenize2(debug);
+  EXPECT_EQ(success, true);
+}
 
-// TEST(TEST_TOKENIZER, TestTokenize3)
-// {
-//   bool success = test_tokenize3(debug);
-//   EXPECT_EQ(success, true);
-// }
+TEST(TEST_TOKENIZER, TestTokenize3)
+{
+  bool success = test_tokenize3(debug);
+  EXPECT_EQ(success, true);
+}
 
-// TEST(TEST_TOKENIZER, TestTokenize4)
-// {
-//   bool success = test_tokenize4(debug);
-//   EXPECT_EQ(success, true);
-// }
+TEST(TEST_TOKENIZER, TestTokenize4)
+{
+  bool success = test_tokenize4(debug);
+  EXPECT_EQ(success, true);
+}
 
 //------------------------------------------------------------------------------
 //@TODO: add more test sets to call test functions here:

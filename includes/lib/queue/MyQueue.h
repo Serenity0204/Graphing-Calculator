@@ -240,10 +240,15 @@ template<typename U>
 ostream& operator <<(ostream& outs, const Queue<U>& printMe)
 {
     typename Queue<U>::Iterator it;
-
+    if(printMe.size() == 0)
+    {
+      outs << "|||" << endl;
+      return outs;
+    }
     for(it = printMe.begin(); it != printMe.end(); it++)
     {
-        if(!it.is_null()) outs << "[" << *it << "]->"; 
+        if(it.is_null()) break;
+        outs << "[" << *it << "]->";
     }
     outs << "|||" << endl;
     return outs;

@@ -42,7 +42,7 @@ int main()
     function.clear();
 
 
-    string func = "sin(x)";
+    string func = "x + 5 + x^3";
     //func = "ln(x)^2";
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();
