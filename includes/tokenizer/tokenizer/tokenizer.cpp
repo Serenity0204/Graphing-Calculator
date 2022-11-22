@@ -2,8 +2,8 @@
 
 void Tokenizer::tokenize(string input)
 {
-    this->_tokens.clear();
-    this->_input.clear();
+    //this->_tokens.clear();
+    //this->_input.clear();
     this->_types = _tokenize(input, this->_tokens);
 }
 Tokenizer::Tokenizer(string input)
@@ -25,8 +25,7 @@ Tokenizer::~Tokenizer()
 
 Queue<Token*> Tokenizer::infix()
 {
-    Queue<Token*> infix;
-    this->_output = infix;
+
     while(!this->_tokens.empty())
     {
         string tk = this->_tokens.pop();
@@ -40,12 +39,14 @@ Queue<Token*> Tokenizer::infix()
             this->_output.push(token);
             continue;
         }
+        
         if(type == VAR)
         {
             token = new Variable();
             this->_output.push(token);
             continue;
         }
+
         if(type == FUNCTION)
         {
             token = new Function(tk);
@@ -78,6 +79,6 @@ Queue<Token*> Tokenizer::infix()
         }
     }
     
-        
-    return this->_output;
+    Queue<Token*> infix = this->_output;
+    return infix;
 }

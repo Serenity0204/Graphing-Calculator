@@ -261,11 +261,6 @@ bool _is_function(string str, int pos, string& func)
         func += "log";
         return true;
     }
-    // if(str.substr(pos, 1) == "x")
-    // {
-    //     func += "x";
-    //     return true;
-    // }
     return false;
 }
 
@@ -298,11 +293,6 @@ bool _is_number(string str, int pos, string& number, int prev_type)
        
 
     number = "";
-    // if(str[pos] == 'X' || str[pos] == 'x')
-    // {
-    //     number += str[pos];
-    //     return true;
-    // }
  
     if(str[pos] == '-')
     {

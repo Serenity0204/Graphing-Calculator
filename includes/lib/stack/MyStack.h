@@ -213,14 +213,9 @@ template<typename U>
 ostream& operator <<(ostream& outs, const Stack<U>& printMe)
 {
     typename Stack<U>::Iterator it;
-    if(it.is_null())
-    {
-      outs << "Empty Stack";
-      return outs;
-    }
     for(it = printMe.begin(); it != printMe.end(); it++)
     {
-        outs << "[" << *it << "]->"; 
+        if(!it.is_null()) outs << "[" << *it << "]->"; 
     }
     outs << "|||" << endl;
     return outs;

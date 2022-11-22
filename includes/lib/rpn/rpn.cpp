@@ -43,8 +43,7 @@ double RPN::rpn(double value)
         }
         if(token->tokenType() == VAR)
         {
-            double val = value;
-            output.push(val);
+            output.push(value);
             continue;
         }
         if(token->tokenType() == OPERATOR)
