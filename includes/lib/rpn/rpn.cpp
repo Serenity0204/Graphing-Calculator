@@ -63,7 +63,8 @@ double RPN::rpn(double value)
         if(token->tokenType() == FUNCTION)
         {
             Function* function_temp = static_cast<Function*>(token);
-            double val = function_temp->evaluate(value);
+            double num = output.pop();
+            double val = function_temp->evaluate(num);
             output.push(val);
             continue;
         }

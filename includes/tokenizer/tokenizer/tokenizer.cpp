@@ -2,8 +2,8 @@
 
 void Tokenizer::tokenize(string input)
 {
-    //this->_tokens.clear();
-    //this->_input.clear();
+    this->_tokens.clear();
+    this->_input.clear();
     this->_types = _tokenize(input, this->_tokens);
 }
 Tokenizer::Tokenizer(string input)
