@@ -261,6 +261,11 @@ bool _is_function(string str, int pos, string& func)
         func += "log";
         return true;
     }
+    if(str.substr(pos, 3) == "abs")
+    {
+        func += "abs";
+        return true;
+    }
     return false;
 }
 
@@ -301,12 +306,13 @@ bool _is_number(string str, int pos, string& number, int prev_type)
     }
     for(int i = pos; i < str.length(); ++i)
     {
-        if(!_is_digit(str[i]) && str[i] != '.') break;
+        if(!_is_digit(str[i]) && str[i] != '.' && str[i] != ' ') break;
         
         number += str[i];
+ 
         pos++;
     }
     
-        
+
     return true;
 }

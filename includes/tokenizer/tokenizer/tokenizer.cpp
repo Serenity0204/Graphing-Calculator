@@ -18,6 +18,21 @@ void Tokenizer::set_input(string input)
 }
 
 
+string Tokenizer::remove_space(string str)
+{
+    // removing white space so can be tokenized
+    string res = "";
+    for(int i = 0; i < str.length(); ++i)
+    {
+        if(str[i] == ' ') continue;
+        res += str[i];
+    }
+    return res;
+}
+
+
+
+
 Tokenizer::~Tokenizer()
 {
     this->_output.clear();
@@ -33,7 +48,8 @@ Queue<Token*> Tokenizer::infix()
         Token* token;
         if(type == INTEGER)
         {
-            double num_temp = stod(tk);
+
+            double num_temp = stod(this->remove_space(tk));
             token = new Integer(num_temp);
             //cout << token << " is an integer" << endl;
             this->_output.push(token);

@@ -29,6 +29,7 @@ void Function::set_args()
 
 double Function::evaluate(double num)
 {
+
     if(this->_function == "sin") return sin(num);
     
     if(this->_function == "cos") return cos(num);
@@ -51,6 +52,7 @@ double Function::evaluate(double num)
     
     if(this->_function == "log") return log10(num);
     
+    if(this->_function == "abs") return fabs(num);
     //if(this->_function == "X" || this->_function == "x") return num;
     
     return 0;

@@ -1,7 +1,9 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
+#include <cmath>
 
 const int OPERATOR_NUM_NEEDED = 2;
+const double PI = atan(1) * 2;
 
 enum TOKEN_TYPES
 {

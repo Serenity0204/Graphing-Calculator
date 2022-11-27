@@ -15,6 +15,7 @@ using namespace std;
 
 int main()
 {
+    
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML Test!");
     // sf::RenderWindow window(sf::VideoMode(200, 200), "There's a cat!");
     // sf::CircleShape shape(100.f);
@@ -38,37 +39,25 @@ int main()
     // text.setFillColor(sf::Color::Red);
     // // set the text style
     // text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-    sf::VertexArray function(sf::LinesStrip, 100);
+    sf::VertexArray function(sf::Points, 100);
     function.clear();
 
 
-    string func = "x^500";
-    //func = "ln(x)^2";
+    string func = "abs(x) * -      1";
+
+    
+    
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();
-
+    cout << infix;
     
     if(infix.empty()) 
     {
-        cout << infix << endl;
+        cout << "empty queue error" << endl;
         return -1;
     }
-    // Queue<Token*>infix;
-    // infix.push(new LeftParen());
-    // infix.push(new Function("x"));
-    // infix.push(new Operator("^"));
-    // infix.push(new Integer(2));
-    // infix.push(new RightParen());
-    // infix.push(new RightParen());
-    //Queue<Token*> infix;
-    // infix.push(new Function("sin(x)"));
-    // infix.push(new Integer(2));
-    // infix.push(new Operator("^"));
-    // infix.push(new Function("cos(x)"));
-    // infix.push(new Integer(2));
-    // infix.push(new Operator("^"));
-    // infix.push(new Operator("+"));
-    
+
+
     ShuntingYard sy(infix);
     Queue<Token*> postfix = sy.postfix();
     if(sy.is_error())
@@ -76,7 +65,7 @@ int main()
         cout << "error in shunting yard!";
         return -1;
     }
-    // //cout << postfix << endl;
+    //cout << postfix << endl;
     RPN rpn(postfix);
 
     for(float x = -50; x < 50; x+=0.01)
@@ -88,6 +77,8 @@ int main()
             cout << "Error in rpn! " << endl;
             return -1;
         }
+        //if(fabs(cos(x)) <= 0.3) continue;
+        //cout << "tan of " << x << " is " << X << endl;
         //cout << X << endl;
         function.append(sf::Vertex(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*X*20.f + window.getSize().y / 2)));
     }

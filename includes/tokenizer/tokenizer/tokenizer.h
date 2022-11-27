@@ -14,8 +14,6 @@
 
 
 
-
-
 class Tokenizer
 {
 private:
@@ -27,8 +25,11 @@ private:
 
     // output
     Queue<Token*> _output;
+
     // private helper
     void tokenize(string input);
+    string remove_space(string str);
+
 public:
     Tokenizer(string input);
     ~Tokenizer();
