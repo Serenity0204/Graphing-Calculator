@@ -63,7 +63,7 @@ bool test_tokenize3(bool debug=false)
 
 bool test_tokenize4(bool debug=false)
 {
-  string num = "";
+  string num = "abs(x + 5)";
   Queue<string> tokens;
   bool error = false;
   Queue<int> types = _tokenize(num, tokens);
