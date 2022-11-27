@@ -41,11 +41,11 @@ int main()
     // text.setFillColor(sf::Color::Red);
     // // set the text style
     // text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-    sf::VertexArray function(sf::LineStrip, 100);
+    sf::VertexArray function(sf::Points, 100);
     function.clear();
 
 
-    string func = "x";
+    string func = "tan(x)";
 
     
     
@@ -79,7 +79,8 @@ int main()
             cout << "Error in rpn! " << endl;
             return -1;
         }
-        if(fabs(cos(x)) <= 0.3) continue;
+        //if(fabs(cos(x)) <= 0.3) continue;
+        if(fabs(y) >= 5) continue;
         //cout << "tan of " << x << " is " << X << endl;
         //cout << X << endl;
         sf::Vertex point(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*y*20.f + window.getSize().y / 2));
@@ -98,9 +99,9 @@ int main()
         }
 
         window.clear(sf::Color::Black);
-        //window.draw(s);
+        window.draw(s);
         
-        // window.draw(function);
+        window.draw(function);
         //window.draw(text);
         //window.draw(sprite);
         //window.draw(shape);
