@@ -25,9 +25,9 @@ void Operator::set_associativity()
 
 const int Operator::precedence() const
 {
-    if(this->_operator == "^") return PRECEDENCE_3;
-    if(this->_operator == "+" || this->_operator == "-") return PRECEDNECE_1;
-    return PRECEDENCE_2;
+    if(this->_operator == "^") return P_3;
+    if(this->_operator == "+" || this->_operator == "-") return P_1;
+    return P_2;
 }
 
 

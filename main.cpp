@@ -19,7 +19,6 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML Test!");
 
     Config config;
-
     // sf::RenderWindow window(sf::VideoMode(200, 200), "There's a cat!");
     // sf::CircleShape shape(100.f);
     // shape.setFillColor(sf::Color::Green);
@@ -42,11 +41,11 @@ int main()
     // text.setFillColor(sf::Color::Red);
     // // set the text style
     // text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-    sf::VertexArray function(sf::Points, 100);
+    sf::VertexArray function(sf::LineStrip, 100);
     function.clear();
 
 
-    string func = "abs(x) * -      1";
+    string func = "x";
 
     
     
@@ -74,16 +73,18 @@ int main()
     for(float x = -50; x < 50; x+=0.01)
     {   
 
-        float X = rpn.rpn(x);
+        float y = rpn.rpn(x);
         if(rpn.is_error())
         {
             cout << "Error in rpn! " << endl;
             return -1;
         }
-        //if(fabs(cos(x)) <= 0.3) continue;
+        if(fabs(cos(x)) <= 0.3) continue;
         //cout << "tan of " << x << " is " << X << endl;
         //cout << X << endl;
-        function.append(sf::Vertex(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*X*20.f + window.getSize().y / 2)));
+        sf::Vertex point(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*y*20.f + window.getSize().y / 2));
+        point.color = sf::Color::White;
+        function.append(point);
     }
 
     sf::Sprite s(config.get_texture(BACK_GROUND));
@@ -96,9 +97,10 @@ int main()
                 window.close();
         }
 
-        window.clear();
-        window.draw(s);
-        window.draw(function);
+        window.clear(sf::Color::Black);
+        //window.draw(s);
+        
+        // window.draw(function);
         //window.draw(text);
         //window.draw(sprite);
         //window.draw(shape);

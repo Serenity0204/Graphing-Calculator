@@ -18,9 +18,9 @@ enum TOKEN_TYPES
 
 enum PRECEDENCE
 {
-  PRECEDNECE_1 = 10,
-  PRECEDENCE_2 = 20,
-  PRECEDENCE_3 = 30,
-  PRECEDENCE_4 = 40,
+  P_1 = 10,
+  P_2 = 20,
+  P_3 = 30,
+  P_4 = 40,
 };
 #endif //CONSTANTS_H

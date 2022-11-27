@@ -17,7 +17,7 @@ const int Function::tokenType() const
 
 const int Function::precedence() const
 {
-    return PRECEDENCE_4;
+    return P_4;
 }
 
 
