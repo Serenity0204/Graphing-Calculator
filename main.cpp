@@ -9,7 +9,7 @@
 #include "includes/lib/token/operator.h"
 #include "includes/lib/token/integer.h"
 // #include "includes/engine/engine.h"
-// #include "includes/config/config.h"
+#include "includes/config/config.h"
 using namespace std;
 
 
@@ -17,6 +17,9 @@ int main()
 {
     
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML Test!");
+
+    Config config;
+
     // sf::RenderWindow window(sf::VideoMode(200, 200), "There's a cat!");
     // sf::CircleShape shape(100.f);
     // shape.setFillColor(sf::Color::Green);
@@ -82,6 +85,8 @@ int main()
         //cout << X << endl;
         function.append(sf::Vertex(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*X*20.f + window.getSize().y / 2)));
     }
+
+    sf::Sprite s(config.get_texture(BACK_GROUND));
     while (window.isOpen())
     {
         sf::Event event;
@@ -92,6 +97,7 @@ int main()
         }
 
         window.clear();
+        window.draw(s);
         window.draw(function);
         //window.draw(text);
         //window.draw(sprite);

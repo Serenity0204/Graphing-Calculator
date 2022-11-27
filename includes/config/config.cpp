@@ -7,19 +7,14 @@ Config::Config()
     this->_set_texture();
 }
 
-Config::~Config()
-{
-    delete[] this->_textures;
-}
+Config::~Config(){}
 
 
-sf::Texture* Config::_get_texture(int index)
+std::shared_ptr<sf::Texture> Config::_get_texture(int key)
 {
-    sf::Texture* walker = this->_textures;
-    for(int i = 0; i < NUM_TEXTURE; ++i)
+    if(this->_texture_map.find(key) != this->_texture_map.end()) 
     {
-        if(i == index) return walker;
-        walker++;
+        return this->_texture_map[key];
     }
     return nullptr;
 }
@@ -27,16 +22,15 @@ sf::Texture* Config::_get_texture(int index)
 
 sf::Texture& Config::get_texture(int index)
 {
-    sf::Texture* texture = this->_get_texture(index);
+    std::shared_ptr<sf::Texture> texture = this->_get_texture(index);
     assert(texture != nullptr && "Getting non existed texture");
     return *texture;
 }
 
+
 void Config::_set_texture()
 {
-    this->_textures = new sf::Texture[NUM_TEXTURE];
-    sf::Texture* walker = this->_textures;
-    sf::Texture t;
-    //t.loadFromFile("../assets/")
-    *walker = t;
+    auto texture = std::make_shared<sf::Texture>();
+    texture->loadFromFile("../assets/cat1.png");
+    this->_texture_map[BACK_GROUND] = texture;
 }

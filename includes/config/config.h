@@ -10,7 +10,6 @@ enum TEXTURES
     BACK_GROUND = 0,
 };
 
-const int NUM_TEXTURE = 1;
 
 
 
@@ -18,8 +17,8 @@ const int NUM_TEXTURE = 1;
 class Config
 {
 private:
-    sf::Texture* _textures;
-    sf::Texture* _get_texture(int index);
+    std::unordered_map<int, std::shared_ptr<sf::Texture>> _texture_map;
+    std::shared_ptr<sf::Texture> _get_texture(int key);
     void _set_texture();
 public:
     Config();
