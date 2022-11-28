@@ -45,7 +45,7 @@ int main()
     function.clear();
 
 
-    string func = "tan(x)";
+    string func = "1/cos(x^2)";
 
     
     
@@ -83,7 +83,7 @@ int main()
         if(fabs(y) >= 5) continue;
         //cout << "tan of " << x << " is " << X << endl;
         //cout << X << endl;
-        sf::Vertex point(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*y*20.f + window.getSize().y / 2));
+        sf::Vertex point(sf::Vector2f(x*50.f + window.getSize().x/2, -1.f*y*70.f + window.getSize().y / 2));
         point.color = sf::Color::White;
         function.append(point);
     }
