@@ -53,11 +53,11 @@ public:
 
     void test()
     {
-        sf::VertexArray function(sf::LineStrip, 200);
+        sf::VertexArray function(sf::LineStrip, 500);
         function.clear();
 
 
-        string func = "3 * sin(x)";
+        string func = "x + 4";
 
 
 
@@ -81,7 +81,7 @@ public:
         //cout << postfix << endl;
         RPN rpn(postfix);
 
-        for(float x = -50; x < 50; x+=0.01)
+        for(float x = -100; x < 100; x+=0.01)
         {   
 
             float y = rpn.rpn(x);
@@ -94,7 +94,7 @@ public:
             if(fabs(y) >= 5) continue;
             //cout << "tan of " << x << " is " << X << endl;
             //cout << X << endl;
-            sf::Vertex point(sf::Vector2f(x*20.f + this->_window.getSize().x/2, -1.f*y*70.f + this->_window.getSize().y / 2));
+            sf::Vertex point(sf::Vector2f(x*50.f + this->_window.getSize().x/2, -1.f*y*70.f + this->_window.getSize().y / 2));
             point.color = sf::Color::White;
             function.append(point);
         }
