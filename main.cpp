@@ -11,6 +11,7 @@
 #include "includes/engine/engine.h"
 #include "includes/config/config.h"
 #include "includes/input_box/input_box.h"
+#include "includes/sidebar/sidebar.h"
 using namespace std;
 
 
@@ -132,7 +133,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML Test!");
     window.setKeyRepeatEnabled(true);
-
+    Sidebar sb(850,250);
     Textbox textbox1(15, sf::Color::White, false);
     sf::Font arial;
     arial.loadFromFile("../assets/arial.ttf");
@@ -231,6 +232,7 @@ int main()
         }
 
         window.clear();
+        sb.draw(window);
         window.draw(function);
         textbox1.drawTo(window);
         window.display();
