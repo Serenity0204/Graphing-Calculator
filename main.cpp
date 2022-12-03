@@ -134,13 +134,20 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML Test!");
     window.setKeyRepeatEnabled(true);
     Sidebar sb(850,250);
-    Textbox textbox1(15, sf::Color::White, false);
+    Textbox textbox1(15, sf::Color::Red, false);
     sf::Font arial;
     arial.loadFromFile("../assets/arial.ttf");
+
     textbox1.setFont(arial);
     textbox1.setPosition({500, 500});
     sf::VertexArray function(sf::LinesStrip, 100);
 
+    Config config;
+    sf::Sprite s(config.get_texture(ERROR_IMAGE));
+    s.setPosition({300, 300});
+
+
+    bool error = false;
     bool test = false;
     while (window.isOpen())
     {
@@ -168,6 +175,7 @@ int main()
             if(test && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
                 test = false;
+                error = false;
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !test)
             {
@@ -184,25 +192,27 @@ int main()
                 
                 Tokenizer tk(func);
                 Queue<Token*>infix = tk.infix();
-                cout << infix;
+                //cout << infix;
                 
                 if(infix.empty()) 
                 {
                     cout << "empty queue error" << endl;
-                    return -1;
+                    error = true;
+                    break;;
                 }
 
-
+                if(error) break;
                 ShuntingYard sy(infix);
                 Queue<Token*> postfix = sy.postfix();
                 if(sy.is_error())
                 {
                     cout << "error in shunting yard!";
-                    return -1;
+                    error = true;
+                    continue;
                 }
                 //cout << postfix << endl;
                 RPN rpn(postfix);
-
+                if(error) break;
                 for(float x = -100; x < 100; x+=0.001)
                 {   
 
@@ -210,7 +220,8 @@ int main()
                     if(rpn.is_error())
                     {
                         cout << "Error in rpn! " << endl;
-                        return -1;
+                        error = true;
+                        break;
                     }
                     //if(fabs(cos(x)) <= 0.3) continue;
                     //if(fabs(y) >= 5) continue;
@@ -226,14 +237,13 @@ int main()
 
 
 
-
-
             }
         }
 
         window.clear();
         sb.draw(window);
-        window.draw(function);
+        if(!error) window.draw(function);
+        else window.draw(s);
         textbox1.drawTo(window);
         window.display();
     }

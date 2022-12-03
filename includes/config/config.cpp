@@ -30,7 +30,10 @@ sf::Texture& Config::get_texture(int index)
 
 void Config::_set_texture()
 {
-    auto texture = std::make_shared<sf::Texture>();
-    texture->loadFromFile("../assets/cat1.png");
-    this->_texture_map[BACK_GROUND] = texture;
+    auto t1 = std::make_shared<sf::Texture>();
+    t1->loadFromFile("../assets/cat1.png");
+    this->_texture_map[BACK_GROUND] = t1;
+    auto t2 = std::make_shared<sf::Texture>();
+    t2->loadFromFile("../assets/dog.png");
+    this->_texture_map[ERROR_IMAGE] = t2;
 }

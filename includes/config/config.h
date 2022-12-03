@@ -8,6 +8,7 @@ using namespace std;
 enum TEXTURES
 {
     BACK_GROUND = 0,
+    ERROR_IMAGE = 1,
 };
 
 

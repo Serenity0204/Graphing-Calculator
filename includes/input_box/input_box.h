@@ -47,7 +47,7 @@ class Textbox {
 public:
 	Textbox(int size, sf::Color color, bool sel) {
 		rect.setSize(sf::Vector2f(300, 100));
-		rect.setFillColor(sf::Color::Green);
+		rect.setFillColor(sf::Color::White);
 		rect.setPosition({500, 500});
 		textbox.setCharacterSize(size);
 		textbox.setFillColor(color);
