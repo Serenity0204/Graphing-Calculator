@@ -137,7 +137,7 @@ int main()
     sf::Font arial;
     arial.loadFromFile("../assets/arial.ttf");
     textbox1.setFont(arial);
-    textbox1.setPosition({100, 100});
+    textbox1.setPosition({500, 500});
     sf::VertexArray function(sf::LinesStrip, 100);
 
     bool test = false;
