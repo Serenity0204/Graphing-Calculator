@@ -10,17 +10,15 @@
 #include "includes/lib/token/integer.h"
 #include "includes/engine/engine.h"
 #include "includes/config/config.h"
+#include "includes/input_box/input_box.h"
 using namespace std;
 
 
-int main()
-{
-    Engine engine;
-    engine.run();
-}
-
-
-
+// int main()
+// {
+//     Engine engine;
+//     engine.run();
+// }
 
 
 // int main()
@@ -120,3 +118,123 @@ int main()
 
 //     return 0;
 // }
+
+
+
+
+
+
+
+// testing 
+
+
+int main()
+{
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML Test!");
+    window.setKeyRepeatEnabled(true);
+
+    Textbox textbox1(15, sf::Color::White, false);
+    sf::Font arial;
+    arial.loadFromFile("../assets/arial.ttf");
+    textbox1.setFont(arial);
+    textbox1.setPosition({100, 100});
+    sf::VertexArray function(sf::LinesStrip, 100);
+
+    bool test = false;
+    while (window.isOpen())
+    {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+        {
+            textbox1.setSelected(true);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            textbox1.setSelected(false);
+        }
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+            if (event.type == sf::Event::TextEntered)
+            {
+                textbox1.typedOn(event);
+                cout << textbox1.getText() << endl;
+            }
+            if(test && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                test = false;
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !test)
+            {
+                test = true;
+
+                
+                function.clear();
+
+
+                string func = "";
+                func += textbox1.getText();
+
+                
+                
+                Tokenizer tk(func);
+                Queue<Token*>infix = tk.infix();
+                cout << infix;
+                
+                if(infix.empty()) 
+                {
+                    cout << "empty queue error" << endl;
+                    return -1;
+                }
+
+
+                ShuntingYard sy(infix);
+                Queue<Token*> postfix = sy.postfix();
+                if(sy.is_error())
+                {
+                    cout << "error in shunting yard!";
+                    return -1;
+                }
+                //cout << postfix << endl;
+                RPN rpn(postfix);
+
+                for(float x = -100; x < 100; x+=0.001)
+                {   
+
+                    float y = rpn.rpn(x);
+                    if(rpn.is_error())
+                    {
+                        cout << "Error in rpn! " << endl;
+                        return -1;
+                    }
+                    //if(fabs(cos(x)) <= 0.3) continue;
+                    //if(fabs(y) >= 5) continue;
+                    //cout << "tan of " << x << " is " << X << endl;
+                    //cout << X << endl;
+                    sf::Vertex point(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*y*50.f + window.getSize().y / 2));
+                    point.color = sf::Color::White;
+                    function.append(point);
+                }
+
+
+
+
+
+
+
+
+            }
+        }
+
+        window.clear();
+        window.draw(function);
+        textbox1.drawTo(window);
+        window.display();
+    }
+
+    return 0;
+}

@@ -91,7 +91,7 @@ public:
                 return;
             }
             //if(fabs(cos(x)) <= 0.3) continue;
-            if(fabs(y) >= 5) continue;
+            //if(fabs(y) >= 5) continue;
             //cout << "tan of " << x << " is " << X << endl;
             //cout << X << endl;
             sf::Vertex point(sf::Vector2f(x*50.f + this->_window.getSize().x/2, -1.f*y*70.f + this->_window.getSize().y / 2));
