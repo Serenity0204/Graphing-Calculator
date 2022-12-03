@@ -177,6 +177,7 @@ int main()
                 test = false;
                 error = false;
             }
+
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !test)
             {
                 test = true;
