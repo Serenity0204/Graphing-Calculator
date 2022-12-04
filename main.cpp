@@ -139,8 +139,8 @@ int main()
     arial.loadFromFile("../assets/arial.ttf");
 
     textbox1.setFont(arial);
-    textbox1.setPosition({500, 500});
-    sf::VertexArray function(sf::LinesStrip, 100);
+    textbox1.setPosition({680, 840});
+    sf::VertexArray function(sf::Points, 100);
 
     Config config;
     sf::Sprite s(config.get_texture(ERROR_IMAGE));
@@ -228,8 +228,10 @@ int main()
                     //if(fabs(y) >= 5) continue;
                     //cout << "tan of " << x << " is " << X << endl;
                     //cout << X << endl;
+                    
                     sf::Vertex point(sf::Vector2f(x*20.f + window.getSize().x/2, -1.f*y*50.f + window.getSize().y / 2));
                     point.color = sf::Color::White;
+                    if(point.position.x >= 800 || point.position.y > 900 || point.position.y < 100) continue;
                     function.append(point);
                 }
 

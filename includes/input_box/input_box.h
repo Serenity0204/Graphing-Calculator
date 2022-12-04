@@ -48,7 +48,7 @@ public:
 	Textbox(int size, sf::Color color, bool sel) {
 		rect.setSize(sf::Vector2f(300, 100));
 		rect.setFillColor(sf::Color::White);
-		rect.setPosition({500, 500});
+		rect.setPosition({680, 840});
 		textbox.setCharacterSize(size);
 		textbox.setFillColor(color);
 		isSelected = sel;
