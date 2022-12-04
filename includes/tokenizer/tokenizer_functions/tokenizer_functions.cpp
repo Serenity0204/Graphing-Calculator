@@ -193,7 +193,23 @@ bool _is_function(string str, int pos, string& func)
     //     func += "max";
     //     return true;
     // }
-
+    if(str.substr(pos, 4) == "sinh")
+    {
+        func += "sinh";
+        return true;
+    }
+    
+    if(str.substr(pos, 4) == "cosh")
+    {
+        func += "cosh";
+        return true;
+    }
+    
+    if(str.substr(pos, 4) == "tanh")
+    {
+        func += "tanh";
+        return true;
+    }
 
 
     if(str.substr(pos, 3) == "sin")
@@ -232,23 +248,7 @@ bool _is_function(string str, int pos, string& func)
         return true;
     }
     
-    if(str.substr(pos, 4) == "sinh")
-    {
-        func += "sinh";
-        return true;
-    }
-    
-    if(str.substr(pos, 4) == "cosh")
-    {
-        func += "cosh";
-        return true;
-    }
-    
-    if(str.substr(pos, 4) == "tanh")
-    {
-        func += "tanh";
-        return true;
-    }
+
     
     if(str.substr(pos, 2) == "ln")
     {
