@@ -1,34 +1,3 @@
-// #ifndef INPUT_BOX_H
-// #define INPUT_BOX_H
-
-// #include <sstream>
-// #include <SFML/Graphics.hpp>
-
-// // Define keys:
-// #define DELETE_KEY 8
-// #define ENTER_KEY 13
-// #define ESCAPE_KEY 27
-
-
-// class InputBox
-// {
-// private:
-    
-// public:
-//     InputBox(int size, sf::Color color, bool sel)
-//     {
-
-//     }
-//     ~InputBox();
-// };
-
-
-
-
-// #endif // INPUT_BOX_H
-
-
-
 
 #ifndef INPUT_BOX_H
 #define INPUT_BOX_H
@@ -43,14 +12,17 @@
 
 
 
-class Textbox {
+class InputBox {
 public:
-	Textbox(int size, sf::Color color, bool sel) {
-		rect.setSize(sf::Vector2f(300, 100));
-		rect.setFillColor(sf::Color::White);
-		rect.setPosition({680, 840});
-		textbox.setCharacterSize(size);
-		textbox.setFillColor(color);
+	InputBox(){}
+	InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,sf::Color text_color, sf::Color box_color, bool sel) 
+	{
+		rect.setSize(box_size); //sf::Vector2f(300, 100)
+		rect.setFillColor(box_color); //sf::Color::White
+		rect.setPosition(position); //{680, 840}
+		textbox.setCharacterSize(font_size);
+		textbox.setFillColor(text_color);
+		textbox.setPosition(position);
 		isSelected = sel;
 
 		// Check if the textbox is selected upon creation and display it accordingly:

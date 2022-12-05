@@ -11,7 +11,19 @@ enum TEXTURES
     ERROR_IMAGE = 1,
 };
 
+enum FONTS
+{
+    ARIAL = 0,
+};
 
+
+const int WINDOW_HEIGHT = 1000;
+const int WINDOW_WIDTH = 1000;
+const int INPUT_BOX_FONT_SIZE = 24;
+const int CHAR_LIMIT = 35;
+const sf::Vector2f INPUT_BOX_SIZE = sf::Vector2f(300, 100);
+const sf::Vector2f INPUT_BOX_POS = sf::Vector2f(680, 840);
+const sf::Vector2f ERROR_IMAGE_POS = sf::Vector2f(300, 300);
 
 
 
@@ -19,12 +31,16 @@ class Config
 {
 private:
     std::unordered_map<int, std::shared_ptr<sf::Texture>> _texture_map;
+    std::unordered_map<int, std::shared_ptr<sf::Font>> _font_map;
+    std::shared_ptr<sf::Font> _get_font(int key);
     std::shared_ptr<sf::Texture> _get_texture(int key);
     void _set_texture();
+    void _set_font();
 public:
     Config();
     ~Config();
     sf::Texture& get_texture(int index);
+    sf::Font& get_font(int index);
 };
 
 

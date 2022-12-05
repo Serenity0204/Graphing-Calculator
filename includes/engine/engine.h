@@ -3,25 +3,34 @@
 #include <bits/stdc++.h>
 #include <SFML/Graphics.hpp>
 #include "../config/config.h"
+#include "../input_box/input_box.h"
+#include "../plot/plot.h"
 #include "../tokenizer/tokenizer/tokenizer.h"
-#include "../lib/shunting_yard/shunting_yard.h"
-#include "../lib/rpn/rpn.h"
 using namespace std;
 
 
 class Engine 
 {
 private:
+    // sfml
     sf::RenderWindow _window;
-    sf::VertexArray vtx;
+    sf::Sprite _error_image;
+    sf::VertexArray _points;
+
+    
+    Config _config;
+    InputBox _input_box;
+    bool _error;
+    bool _need_reset;
+
+    void _update_equation();
+    void _update_input_box();
 public:
-    Engine()
-    {
-        this->_window.create(sf::VideoMode(1000, 1000), "Graphing Calculator");
-    }
-    ~Engine(){}
-    void run(){}
-        
+    Engine();
+    ~Engine();
+    void input();
+    void run();
+    void display();
 };
 
 
