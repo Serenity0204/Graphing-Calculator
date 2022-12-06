@@ -312,7 +312,13 @@ bool _is_number(string str, int pos, string& number, int prev_type)
  
         pos++;
     }
-    
-
+    if(number[0] == '-')
+    {
+        for(int i = 1; i < number.length(); ++i)
+        {
+            if(_is_digit(number[i])) return true;
+        }
+        return false;
+    }
     return true;
 }

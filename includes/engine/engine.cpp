@@ -80,8 +80,12 @@ void Engine::_update_equation()
     string func = "";
     func += this->_input_box.getText();
     Tokenizer tk(func);
+    Queue<string> q1;
+    Queue<int> q = _tokenize(func, q1);
+    cout << q1 << endl;
+    cout << q << endl;
     Queue<Token*>infix = tk.infix();
-
+    //cout << "infix: " << infix << endl;
     if(infix.empty()) 
     {
         cout << "Tokenize error" << endl;
