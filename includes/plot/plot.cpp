@@ -24,7 +24,7 @@ sf::VertexArray Plot::operator()(float low, float up, int points, bool& error)
         return function;
     }
     RPN rpn(postfix);
-    for(float x = -100; x < 100; x+=0.001)
+    for(float x = -100; x < 100; x+=0.0005)
     {   
 
         float y = rpn.rpn(x);
