@@ -17,6 +17,9 @@ Engine::Engine()
     this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
     this->_error = false;
     this->_need_reset = false;
+    this->_zoom_factor = ZOOM_MAX;
+    this->_low_bound = -100;
+    this->_up_bound = 100;
     this->_error_image = sf::Sprite(this->_config.get_texture(ERROR_IMAGE));
     this->_error_image.setPosition(ERROR_IMAGE_POS);
 }
@@ -62,6 +65,22 @@ void Engine::input()
             this->_update_equation();
         }
 
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && this->_zoom_factor > ZOOM_MIN)
+        {
+            cout << "Zooming in" << endl;
+            this->_zoom_factor -= ZOOM_DELTA;
+            // this->_low_bound += 10;
+            // this->_up_bound -= 10;
+            if(!this->_error && this->_points.getVertexCount() != 0) this->_update_equation();
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && this->_zoom_factor < ZOOM_MAX)
+        {
+            cout << "Zooming out" << endl;
+            this->_zoom_factor += ZOOM_DELTA;
+            // this->_low_bound -= 10;
+            // this->_up_bound += 10;
+            if(!this->_error && this->_points.getVertexCount() != 0) this->_update_equation();
+        }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
             cout << "User reset error state" << endl;
@@ -80,10 +99,6 @@ void Engine::_update_equation()
     string func = "";
     func += this->_input_box.getText();
     Tokenizer tk(func);
-    Queue<string> q1;
-    Queue<int> q = _tokenize(func, q1);
-    cout << q1 << endl;
-    cout << q << endl;
     Queue<Token*>infix = tk.infix();
     //cout << "infix: " << infix << endl;
     if(infix.empty()) 
@@ -95,7 +110,7 @@ void Engine::_update_equation()
     }
 
     Plot plot(infix);
-    sf::VertexArray points = plot(-100, 100, 100, this->_error);
+    sf::VertexArray points = plot(this->_low_bound, this->_up_bound, this->_zoom_factor, this->_error);
     this->_need_reset = this->_error;
     this->_points = points;
 }

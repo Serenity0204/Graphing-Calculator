@@ -18,9 +18,13 @@ enum FONTS
 
 
 const int WINDOW_HEIGHT = 1000;
-const int WINDOW_WIDTH = 1000;
+const int WINDOW_WIDTH = 1200;
 const int INPUT_BOX_FONT_SIZE = 24;
 const int CHAR_LIMIT = 35;
+const float ZOOM_MAX = 4.5;
+const float ZOOM_MIN = 0.5;
+const float ZOOM_DELTA = 0.25;
+
 const sf::Vector2f INPUT_BOX_SIZE = sf::Vector2f(300, 100);
 const sf::Vector2f INPUT_BOX_POS = sf::Vector2f(680, 840);
 const sf::Vector2f ERROR_IMAGE_POS = sf::Vector2f(300, 300);

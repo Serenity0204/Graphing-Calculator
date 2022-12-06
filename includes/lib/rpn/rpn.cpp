@@ -63,6 +63,11 @@ double RPN::rpn(double value)
         if(token->tokenType() == FUNCTION)
         {
             Function* function_temp = static_cast<Function*>(token);
+            if(output.empty()) 
+            {
+                this->_error = true;
+                return -1;
+            }
             double num = output.pop();
             double val = function_temp->evaluate(num);
             output.push(val);

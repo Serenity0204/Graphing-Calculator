@@ -229,6 +229,28 @@ bool test_sy_edge_paren(bool debug = false)
 
 }
 
+bool test_error1(bool debug = false)
+{
+  Queue<Token*> postfix;
+  Queue<Token*> infix2;
+  Queue<Token*> infix_q;
+  infix2.push(new Function("tan"));
+  infix2.push(new LeftParen());
+  infix2.push(new RightParen());
+  infix_q = infix2;
+  ShuntingYard sy(infix_q);  
+  postfix = sy.postfix();
+  if(debug)
+  {
+    cout << "tan(): " << postfix << endl;
+    cout << "should be: " << "tan" << endl;
+  }
+  RPN rpn(postfix);
+  double val = rpn.rpn();
+  if(rpn.is_error()) return true;
+  return false;
+  
+}
 
 
 
@@ -282,6 +304,14 @@ TEST(TEST_SY_EDGE, TestSYEdgeParen)
   bool success = test_sy_edge_paren(debug);
   EXPECT_EQ(success, true);
 }
+
+TEST(TEST_SY_ERROR, TestSYError)
+{
+  bool success = test_error1(debug);
+  EXPECT_EQ(success, true);
+}
+
+
 
 //------------------------------------------------------------------------------
 

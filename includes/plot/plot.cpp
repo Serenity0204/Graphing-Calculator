@@ -11,9 +11,9 @@ Plot::~Plot()
     this->_infix.clear();
 }
 
-sf::VertexArray Plot::operator()(float low, float up, int points, bool& error)
+sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool& error)
 {
-    sf::VertexArray function(sf::Points, points);
+    sf::VertexArray function(sf::Points, 200);
     function.clear();
     ShuntingYard sy(this->_infix);
     Queue<Token*> postfix = sy.postfix();
@@ -24,7 +24,7 @@ sf::VertexArray Plot::operator()(float low, float up, int points, bool& error)
         return function;
     }
     RPN rpn(postfix);
-    for(float x = -100; x < 100; x+=0.0005)
+    for(float x = low; x < high; x+=0.0005)
     {   
 
         float y = rpn.rpn(x);
@@ -35,12 +35,13 @@ sf::VertexArray Plot::operator()(float low, float up, int points, bool& error)
             function.clear();
             return function;
         }
-        //if(fabs(cos(x)) <= 0.3) continue;
-        //if(fabs(y) >= 5) continue;
-        //cout << "tan of " << x << " is " << X << endl;
-        //cout << X << endl;
+
+        // if low and high up, zoom factor down
+        // if low and high down, zoom factor up
+        float zoom_factor_x = high / zoom_factor;
+        float zoom_factor_y = high / zoom_factor; //+ 37.f * zoom_factor
+        sf::Vertex point(sf::Vector2f(x*zoom_factor_x + WINDOW_WIDTH/2 , -1.f * y*zoom_factor_y + WINDOW_HEIGHT / 2));
         
-        sf::Vertex point(sf::Vector2f(x*20.f + WINDOW_WIDTH/2, -1.f*y*50.f + WINDOW_HEIGHT / 2));
         point.color = sf::Color::White;
         if(point.position.x >= 995 || point.position.y > 900 || point.position.y < 100) continue;
         function.append(point);

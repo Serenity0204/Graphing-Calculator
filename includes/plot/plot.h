@@ -16,7 +16,7 @@ private:
 public:
     Plot(){}
     Plot(Queue<Token*> infix);
-    sf::VertexArray operator()(float low, float up, int points, bool& error);
+    sf::VertexArray operator()(float low, float high, float zoom_factor, bool& error);
     ~Plot();
 };
 

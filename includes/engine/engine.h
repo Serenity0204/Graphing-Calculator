@@ -23,7 +23,9 @@ private:
     InputBox _input_box;
     bool _error;
     bool _need_reset;
-
+    float _zoom_factor;
+    float _low_bound;
+    float _up_bound;
     void _update_equation();
     void _update_input_box();
 public:
