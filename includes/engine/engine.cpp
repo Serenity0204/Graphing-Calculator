@@ -5,6 +5,14 @@ Engine::Engine()
 {
     this->_window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML Graphing Calculator");
     this->_window.setKeyRepeatEnabled(true);
+
+    this->_x_axis.setSize({1000, 5});
+    this->_y_axis.setSize({5, 1000});
+    this->_x_axis.setPosition(X_AXIS_POS);
+    this->_y_axis.setPosition(Y_AXIS_POS);
+    this->_x_axis.setFillColor(sf::Color::Red);
+    this->_y_axis.setFillColor(sf::Color::Red);
+
     this->_config = Config();
     this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
     this->_error = false;
@@ -98,6 +106,8 @@ void Engine::_update_equation()
 void Engine::display()
 {
     this->_input_box.drawTo(this->_window);  
+    this->_window.draw(this->_x_axis);
+    this->_window.draw(this->_y_axis);
     if(!this->_error)
     {
         this->_window.draw(this->_points);

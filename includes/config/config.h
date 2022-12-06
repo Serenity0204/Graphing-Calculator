@@ -24,7 +24,8 @@ const int CHAR_LIMIT = 35;
 const sf::Vector2f INPUT_BOX_SIZE = sf::Vector2f(300, 100);
 const sf::Vector2f INPUT_BOX_POS = sf::Vector2f(680, 840);
 const sf::Vector2f ERROR_IMAGE_POS = sf::Vector2f(300, 300);
-
+const sf::Vector2f X_AXIS_POS = sf::Vector2f(0, 500);
+const sf::Vector2f Y_AXIS_POS = sf::Vector2f(500, 0);
 
 
 class Config

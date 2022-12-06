@@ -42,7 +42,7 @@ sf::VertexArray Plot::operator()(float low, float up, int points, bool& error)
         
         sf::Vertex point(sf::Vector2f(x*20.f + WINDOW_WIDTH/2, -1.f*y*50.f + WINDOW_HEIGHT / 2));
         point.color = sf::Color::White;
-        if(point.position.x >= 800 || point.position.y > 900 || point.position.y < 100) continue;
+        if(point.position.x >= 995 || point.position.y > 900 || point.position.y < 100) continue;
         function.append(point);
     }
 

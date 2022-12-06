@@ -16,8 +16,9 @@ private:
     sf::RenderWindow _window;
     sf::Sprite _error_image;
     sf::VertexArray _points;
+    sf::RectangleShape _y_axis;
+    sf::RectangleShape _x_axis;
 
-    
     Config _config;
     InputBox _input_box;
     bool _error;

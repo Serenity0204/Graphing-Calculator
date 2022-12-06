@@ -14,7 +14,7 @@ Button::Button(std::string btnText, sf::Vector2f buttonSize, int charSize, sf::C
 
 	text.setString(btnText);
 	text.setCharacterSize(charSize);
-	text.setColor(textColor);
+	text.setFillColor(textColor);
 }
 
 void Button::setText(std::string t) {
@@ -38,7 +38,7 @@ void Button::setBackColor(sf::Color color) {
 }
 
 void Button::setTextColor(sf::Color color) {
-	text.setColor(color);
+	text.setFillColor(color);
 }
 
 void Button::setPosition(sf::Vector2f point) {
