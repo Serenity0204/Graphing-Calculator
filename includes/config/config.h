@@ -21,7 +21,7 @@ const int WINDOW_HEIGHT = 1000;
 const int WINDOW_WIDTH = 1200;
 const int INPUT_BOX_FONT_SIZE = 24;
 const int CHAR_LIMIT = 35;
-const float ZOOM_MAX = 4.5;
+const float ZOOM_MAX = 1.25;
 const float ZOOM_MIN = 0.5;
 const float ZOOM_DELTA = 0.25;
 

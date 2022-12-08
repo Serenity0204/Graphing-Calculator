@@ -21,13 +21,17 @@ const int Function::precedence() const
 }
 
 
-
 void Function::set_args()
 {
+    if(this->_function == "max" || this->_function == "min")
+    {
+        this->_args = 2;
+        return;
+    }
     this->_args = 1;   
 }
 
-double Function::evaluate(double num)
+double Function::evaluate(double num, double optional)
 {
 
     if(this->_function == "sin") return sin(num);
@@ -53,8 +57,10 @@ double Function::evaluate(double num)
     if(this->_function == "log") return log10(num);
     
     if(this->_function == "abs") return fabs(num);
-    //if(this->_function == "X" || this->_function == "x") return num;
     
+    if(this->_function == "max") return max(num, optional);
+    
+    if(this->_function == "min") return min(num, optional);
     return 0;
 }
      

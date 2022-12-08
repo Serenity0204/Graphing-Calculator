@@ -68,8 +68,18 @@ double RPN::rpn(double value)
                 this->_error = true;
                 return -1;
             }
-            double num = output.pop();
-            double val = function_temp->evaluate(num);
+            double num1 = output.pop();
+            double num2 = 0;
+            if(function_temp->get_args() == 2)
+            {
+                if(output.empty())
+                {
+                    this->_error = true;
+                    return -1;
+                }
+                num2 = output.pop();
+            }
+            double val = function_temp->evaluate(num1, num2);
             output.push(val);
             continue;
         }

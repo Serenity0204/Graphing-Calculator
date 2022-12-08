@@ -188,11 +188,18 @@ bool _is_function(string str, int pos, string& func)
 
     func = "";
 
-    // if(str.substr(pos, 3) == "max()")
-    // {
-    //     func += "max";
-    //     return true;
-    // }
+    if(str.substr(pos, 3) == "max")
+    {
+        func += "max";
+        return true;
+    }
+
+    if(str.substr(pos, 3) == "min")
+    {
+        func += "min";
+        return true;
+    }
+
     if(str.substr(pos, 4) == "sinh")
     {
         func += "sinh";
@@ -282,7 +289,7 @@ bool _is_digit(char c)
 // check for negative sign
 bool _is_unary_minus(string input, int pos, int prev_type)
 {
-    bool is_unary_check = ((pos == 0) || (prev_type == LPAREN) || (prev_type == OPERATOR));
+    bool is_unary_check = ((pos == 0) || (prev_type == LPAREN) || (prev_type == OPERATOR) || (prev_type == INTEGER) || (prev_type == VAR));
     if(input[pos] == '-' && is_unary_check) return true;
     return false;
 }
@@ -312,6 +319,7 @@ bool _is_number(string str, int pos, string& number, int prev_type)
  
         pos++;
     }
+    cout << number << endl;
     if(number[0] == '-')
     {
         for(int i = 1; i < number.length(); ++i)

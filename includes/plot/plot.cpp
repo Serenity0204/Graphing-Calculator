@@ -13,7 +13,7 @@ Plot::~Plot()
 
 sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool& error)
 {
-    sf::VertexArray function(sf::Points, 200);
+    sf::VertexArray function(sf::Points, 80500);
     function.clear();
     ShuntingYard sy(this->_infix);
     Queue<Token*> postfix = sy.postfix();
@@ -38,8 +38,8 @@ sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool&
 
         // if low and high up, zoom factor down
         // if low and high down, zoom factor up
-        float zoom_factor_x = high / zoom_factor;
-        float zoom_factor_y = high / zoom_factor; //+ 37.f * zoom_factor
+        float zoom_factor_x = (high + 20) / zoom_factor;
+        float zoom_factor_y = (high + 20) / zoom_factor; //+ 37.f * zoom_factor
         sf::Vertex point(sf::Vector2f(x*zoom_factor_x + WINDOW_WIDTH/2 , -1.f * y*zoom_factor_y + WINDOW_HEIGHT / 2));
         
         point.color = sf::Color::White;

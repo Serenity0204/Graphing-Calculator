@@ -24,7 +24,7 @@ public:
     void Print(ostream &outs) const override;
 
     // member functions
-    double evaluate(double num);
+    double evaluate(double num, double optional = 0);
     int get_args(){return this->_args;}
     friend ostream& operator <<(ostream &outs, const Function &func);
     friend ostream& operator <<(ostream& outs, const Function* func);

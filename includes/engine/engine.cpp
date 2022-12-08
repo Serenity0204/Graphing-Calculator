@@ -17,9 +17,9 @@ Engine::Engine()
     this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
     this->_error = false;
     this->_need_reset = false;
-    this->_zoom_factor = ZOOM_MAX;
-    this->_low_bound = -100;
-    this->_up_bound = 100;
+    this->_zoom_factor = ZOOM_MIN;
+    this->_low_bound = -20;
+    this->_up_bound = 20;
     this->_error_image = sf::Sprite(this->_config.get_texture(ERROR_IMAGE));
     this->_error_image.setPosition(ERROR_IMAGE_POS);
 }
@@ -101,6 +101,8 @@ void Engine::_update_equation()
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();
     //cout << "infix: " << infix << endl;
+
+
     if(infix.empty()) 
     {
         cout << "Tokenize error" << endl;
