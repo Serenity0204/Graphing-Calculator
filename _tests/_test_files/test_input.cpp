@@ -14,14 +14,6 @@
 
 using namespace std;
 
-bool test_stub(bool debug=false)
-{
-  if (debug) {
-    cout << "testB:: test-sub() entering test_sub" << endl;
-  }
-  return true;
-}
-
 //------------------------------------------------------------------------------
 //@TODO: add more test functions here:
 
@@ -80,11 +72,6 @@ bool test_tokenize4(bool debug=false)
 // Lord help me! 
 const bool debug = false;
 
-TEST(TEST_STUB, TestStub)
-{
-  bool success = test_stub(debug);
-  EXPECT_EQ(success, true);
-}
 
 
 
