@@ -23,12 +23,13 @@ sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool&
         error = true;
         return function;
     }
-    RPN rpn(postfix);
+    this->_rpn = RPN(postfix);
+
     for(float x = low; x < high; x+=0.0005)
     {   
 
-        float y = rpn.rpn(x);
-        if(rpn.is_error())
+        float y = this->_rpn.rpn(x);
+        if(this->_rpn.is_error())
         {
             cout << "Error in rpn! " << endl;
             error = true;
@@ -40,7 +41,7 @@ sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool&
         // if low and high down, zoom factor up
         float zoom_factor_x = (high + 20) / zoom_factor;
         float zoom_factor_y = (high + 20) / zoom_factor; //+ 37.f * zoom_factor
-        sf::Vertex point(sf::Vector2f(x*zoom_factor_x + WINDOW_WIDTH/2 , -1.f * y*zoom_factor_y + WINDOW_HEIGHT / 2));
+        sf::Vertex point(sf::Vector2f(x*zoom_factor_x + WINDOW_WIDTH/2 , -1.f*y*zoom_factor_y + WINDOW_HEIGHT / 2));
         
         point.color = sf::Color::White;
         if(point.position.x >= 995 || point.position.y > 900 || point.position.y < 100) continue;
