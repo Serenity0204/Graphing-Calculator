@@ -129,12 +129,9 @@ void Engine::display()
     this->_input_box.drawTo(this->_window);  
     this->_window.draw(this->_x_axis);
     this->_window.draw(this->_y_axis);
-    if(!this->_error)
-    {
-        this->_window.draw(this->_points);
-        return;
-    }
-    this->_window.draw(this->_error_image);
+    if(!this->_error) this->_window.draw(this->_points);
+    if(this->_error) this->_window.draw(this->_error_image);
+    this->_input_box.drawTo(this->_window);
 }
 
 void Engine::run()
