@@ -18,8 +18,8 @@ Engine::Engine()
     this->_error = false;
     this->_need_reset = false;
     this->_zoom_factor = ZOOM_MIN;
-    this->_low_bound = -20;
-    this->_up_bound = 20;
+    this->_low_bound = -35;
+    this->_up_bound = 35;
     this->_error_image = sf::Sprite(this->_config.get_texture(ERROR_IMAGE));
     this->_error_image.setPosition(ERROR_IMAGE_POS);
 }
