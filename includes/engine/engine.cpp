@@ -13,6 +13,7 @@ Engine::Engine()
     this->_x_axis.setFillColor(sf::Color::Red);
     this->_y_axis.setFillColor(sf::Color::Red);
 
+    this->_history_bar = HistoryBar();
     this->_config = Config();
     this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
     this->_error = false;
@@ -88,6 +89,7 @@ void Engine::input()
             this->_need_reset = false;
             this->_error = false;
         }
+        this->_history_bar.isClicked(event, this->_window);
     }
 }
 
@@ -126,9 +128,11 @@ void Engine::_update_equation()
 
 void Engine::display()
 {
+    this->_history_bar.drawTo(this->_window);
     this->_input_box.drawTo(this->_window);  
     this->_window.draw(this->_x_axis);
     this->_window.draw(this->_y_axis);
+    this->_history_bar.isOver(this->_window);
     if(!this->_error) this->_window.draw(this->_points);
     if(this->_error) this->_window.draw(this->_error_image);
     this->_input_box.drawTo(this->_window);

@@ -7,6 +7,7 @@
 #include "../plot/plot.h"
 #include "../history_bar/history_bar.h"
 #include "../tokenizer/tokenizer/tokenizer.h"
+#include "../history_bar/history_bar.h"
 using namespace std;
 
 
@@ -22,6 +23,9 @@ private:
 
     Config _config;
     InputBox _input_box;
+    HistoryBar _history_bar;
+
+    
     bool _error;
     bool _need_reset;
     float _zoom_factor;

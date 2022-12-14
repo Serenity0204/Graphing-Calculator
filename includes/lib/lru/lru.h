@@ -28,6 +28,7 @@ public:
         return outs;
     }
 
+    LRU(){}
     LRU(int cap)
     {
         this->_capacity = cap;
@@ -36,7 +37,14 @@ public:
     } 
 
     ~LRU(){}
-    
+    const K& operator [](int index)
+    {
+        int count = 0;
+        for(const auto& x: this->_list)
+        {
+            if(count == index) return x;
+        }
+    }   
     V get(K key)
     {
         if(!this->_map.count(key)) return V();
