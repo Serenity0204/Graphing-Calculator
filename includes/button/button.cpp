@@ -49,7 +49,7 @@ void Button::setPosition(sf::Vector2f point) {
 
 	float xPos = (point.x + btnWidth / div) - (text.getLocalBounds().width / 2);
 	float yPos = (point.y + btnHeight / div) - (text.getLocalBounds().height / 2);
-	text.setPosition(xPos, yPos);
+	text.setPosition(xPos - 50, yPos);
 }
 
 void Button::drawTo(sf::RenderWindow &window) {

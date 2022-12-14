@@ -7,7 +7,7 @@
 #include "../plot/plot.h"
 #include "../history_bar/history_bar.h"
 #include "../tokenizer/tokenizer/tokenizer.h"
-#include "../history_bar/history_bar.h"
+#include "../lib/lru/lru.h"
 using namespace std;
 
 
@@ -24,15 +24,27 @@ private:
     Config _config;
     InputBox _input_box;
     HistoryBar _history_bar;
+    LRU<string, sf::VertexArray> _lru;
 
-    
+    string _current_function;
     bool _error;
     bool _need_reset;
     float _zoom_factor;
     float _low_bound;
     float _up_bound;
+    bool is_full()
+    {
+        for(int i = 0; i < 5; ++i)
+        {
+            string unset = "Unset " + to_string(i);
+            if(this->_lru[i] == unset) return false;
+        }
+        return true;
+    }
+    void _update_cache(int index);
     void _update_equation();
     void _update_input_box();
+    void _update_history_box();
 public:
     Engine();
     ~Engine();

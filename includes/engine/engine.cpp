@@ -12,10 +12,21 @@ Engine::Engine()
     this->_y_axis.setPosition(Y_AXIS_POS);
     this->_x_axis.setFillColor(sf::Color::Red);
     this->_y_axis.setFillColor(sf::Color::Red);
-
+    this->_current_function = "";
     this->_history_bar = HistoryBar();
     this->_config = Config();
     this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
+
+    sf::VertexArray temp(sf::Points, 0);
+    temp.clear();
+    this->_lru = LRU<string, sf::VertexArray>(5);
+
+    for(int i = 0; i < 5; ++i)
+    {
+        string unset = "Unset " + to_string(i);
+        this->_lru.put(unset, temp);
+    }
+
     this->_error = false;
     this->_need_reset = false;
     this->_zoom_factor = ZOOM_MIN;
@@ -58,29 +69,36 @@ void Engine::input()
         if (event.type == sf::Event::TextEntered)
         {
             this->_input_box.typedOn(event);
-            //cout << this->_input_box.getText()<< endl;
         }
         if(!this->_need_reset && sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             cout << "User graphing" << endl;
             this->_update_equation();
+            if(!this->_error) this->_lru.put(this->_current_function, this->_points);
+            cout << this->_lru << endl;
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && this->_zoom_factor > ZOOM_MIN)
         {
             cout << "Zooming in" << endl;
             this->_zoom_factor -= ZOOM_DELTA;
-            // this->_low_bound += 10;
-            // this->_up_bound -= 10;
-            if(!this->_error && this->_points.getVertexCount() != 0) this->_update_equation();
+            if(!this->_error && this->_points.getVertexCount() != 0) 
+            {
+                this->_update_equation();
+                this->_lru.put(this->_current_function, this->_points);
+            }
+            cout << this->_lru << endl;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && this->_zoom_factor < ZOOM_MAX)
         {
             cout << "Zooming out" << endl;
             this->_zoom_factor += ZOOM_DELTA;
-            // this->_low_bound -= 10;
-            // this->_up_bound += 10;
-            if(!this->_error && this->_points.getVertexCount() != 0) this->_update_equation();
+            if(!this->_error && this->_points.getVertexCount() != 0) 
+            {
+                this->_update_equation();
+                this->_lru.put(this->_current_function, this->_points);
+            }
+            cout << this->_lru << endl;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
@@ -89,16 +107,30 @@ void Engine::input()
             this->_need_reset = false;
             this->_error = false;
         }
-        this->_history_bar.isClicked(event, this->_window);
+        this->_history_bar.update_buttons(this->_lru.list_to_vec());
+
+        int index = -1;
+        if(this->_history_bar.isClicked(event, this->_window, index) && index != -1) this->_update_cache(index);
+        
     }
 }
 
+void Engine::_update_cache(int index)
+{
+    string key = this->_lru.get_key(index);
+    if(key.substr(0, 5) == "Unset") return;
+    this->_current_function = key;
+    this->_points = this->_lru.get(key);
+    this->_history_bar.update_buttons(this->_lru.list_to_vec());
+    
+}
 
 
 
 void Engine::_update_equation()
 {
     string func = "";
+    this->_current_function = "";
     func += this->_input_box.getText();
     Tokenizer tk(func);
     Queue<Token*>infix = tk.infix();
@@ -117,6 +149,8 @@ void Engine::_update_equation()
     sf::VertexArray points = plot(this->_low_bound, this->_up_bound, this->_zoom_factor, this->_error);
     this->_need_reset = this->_error;
     this->_points = points;
+    if(!this->_error) this->_current_function = func;
+    //cout << endl << "Current function is: " << this->_current_function << endl;
 }
 
 
@@ -151,7 +185,6 @@ void Engine::run()
         this->_update_input_box();
         this->input();
         this->_window.clear();
-
         this->display();
         this->_window.display();
     }

@@ -12,12 +12,12 @@ public:
     template <typename Key, typename Val>
     friend ostream& operator <<(ostream& outs, const LRU<Key, Val>& printMe)
     {
-        outs << "map: " << endl;
-        for(const auto& x : printMe._map)
-        {
-            outs << "key: " << x.first << endl;
-            outs << "val: " << x.second << endl;
-        }
+        // outs << "map: " << endl;
+        // for(const auto& x : printMe._map)
+        // {
+        //     outs << "key: " << x.first << endl;
+        //     //outs << "val: " << x.second << endl;
+        // }
         outs << endl;
         outs << "list: ";
         for(const auto& x : printMe._list)
@@ -47,7 +47,7 @@ public:
     }   
     V get(K key)
     {
-        if(!this->_map.count(key)) return V();
+        assert(this->_map.count(key) > 0);
         this->make_recent(key);
         return this->_map[key];
     }
@@ -62,6 +62,25 @@ public:
         }
         if(this->_capacity == this->_list.size()) this->remove_latest_unused();
         this->add_recent(key, val);
+    }
+
+    vector<string> list_to_vec()
+    {
+        vector<string> res;
+        for(const auto& x: this->_list)
+        {
+            res.push_back(x);
+        }
+        return res;
+    }
+    K get_key(int index)
+    {
+        int count = 0;
+        for(const auto& x: this->_list)
+        {
+            if(count == index) return x;
+            count++;
+        }  
     }
 private:    
     void make_recent(K key)

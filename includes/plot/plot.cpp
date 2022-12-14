@@ -25,6 +25,8 @@ sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool&
     }
     this->_rpn = RPN(postfix);
 
+    ColorGenerator cg;
+    sf::Color color = cg.get_rand_color();
     for(float x = low; x < high; x+=0.0005)
     {   
 
@@ -45,8 +47,9 @@ sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool&
         float Y = -1.f*y*zoom_factor_y + WINDOW_HEIGHT / 2;
         float X = x*zoom_factor_x + WINDOW_WIDTH/2;
         sf::Vertex point(sf::Vector2f(X, Y));
-        
-        point.color = sf::Color::White;
+
+
+        point.color = color;
         if(X >= 1000) continue;
         if(fabs(Y) >= 900 || fabs(Y) < 100) continue;
         function.append(point);
