@@ -5,6 +5,7 @@
 #include "../config/config.h"
 #include "../input_box/input_box.h"
 #include "../plot/plot.h"
+#include "../history_bar/history_bar.h"
 #include "../tokenizer/tokenizer/tokenizer.h"
 using namespace std;
 
