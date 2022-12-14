@@ -133,9 +133,10 @@ void Engine::display()
     this->_window.draw(this->_x_axis);
     this->_window.draw(this->_y_axis);
     this->_history_bar.isOver(this->_window);
+    this->_input_box.drawTo(this->_window);
     if(!this->_error) this->_window.draw(this->_points);
     if(this->_error) this->_window.draw(this->_error_image);
-    this->_input_box.drawTo(this->_window);
+    
 }
 
 void Engine::run()

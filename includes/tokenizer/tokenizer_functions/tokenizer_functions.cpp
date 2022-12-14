@@ -1,11 +1,17 @@
 #include "tokenizer_functions.h"
 
 
+string remove_space(string str)
+{
+    str.erase(remove(str.begin(), str.end(), ' '), str.end());
+    return str;
+}
 
 
 
 Queue<int> _tokenize(string input, Queue<string>& tokens)
 {
+    input = remove_space(input);
     int index = 0;  
     Queue<int> token_types;
     while(index < input.length())
@@ -14,11 +20,12 @@ Queue<int> _tokenize(string input, Queue<string>& tokens)
         string token = "";
         int token_type = 0;
         // if it's space, skip
-        if(input[index] == ' ' || input[index] == ',')
-        {
-            index++;
-            continue;
-        }
+
+        // if(input[index] == ' ' || input[index] == ',')
+        // {
+        //     index++;
+        //     continue;
+        // }
         int idx_hold = index;
         int prev_type = (!token_types.empty()) ? token_types.back() : -1;
         _get_token(input, index, token, token_type, prev_type);
@@ -44,7 +51,13 @@ void _get_token(string input, int& index, string& token, int& token_type, int pr
     token = "";
     string tk1, tk2, tk3, tk4, tk5, tk6;
 
-
+    if(input[index] == ',')
+    {
+        index++;
+        token = ",";
+        token_type = TOKEN;
+        return;
+    }
     bool is_func = _is_function(input, index, tk4);
     if(is_func) 
     {
@@ -281,7 +294,6 @@ bool _is_function(string str, int pos, string& func)
 bool _is_digit(char c)
 {
     if(c <= 57 && c >= 48) return true;
-    //if(c == 'x' || c == 'X') return true;
     return false;
 }
 
@@ -289,7 +301,7 @@ bool _is_digit(char c)
 // check for negative sign
 bool _is_unary_minus(string input, int pos, int prev_type)
 {
-    bool is_unary_check = ((pos == 0) || (prev_type == LPAREN) || (prev_type == OPERATOR) || (prev_type == INTEGER) || (prev_type == VAR));
+    bool is_unary_check = ((pos == 0) || (prev_type == LPAREN) || (prev_type == OPERATOR) || (prev_type == TOKEN));
     if(input[pos] == '-' && is_unary_check) return true;
     return false;
 }
@@ -319,7 +331,7 @@ bool _is_number(string str, int pos, string& number, int prev_type)
  
         pos++;
     }
-    cout << number << endl;
+    //cout << number << endl;
     if(number[0] == '-')
     {
         for(int i = 1; i < number.length(); ++i)

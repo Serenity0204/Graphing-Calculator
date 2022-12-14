@@ -48,9 +48,7 @@ Queue<Token*> Tokenizer::infix()
         Token* token;
         if(type == INTEGER)
         {
-
-            double num_temp = stod(this->remove_space(tk));
-            token = new Integer(num_temp);
+            token = new Integer(stod(tk));
             //cout << token << " is an integer" << endl;
             this->_output.push(token);
             continue;

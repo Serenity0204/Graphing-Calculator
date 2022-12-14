@@ -16,6 +16,9 @@ Queue<int> _tokenize(string input, Queue<string>& tokens);
 // get a token at a certain index of input string
 void _get_token(string input, int& index, string& token, int& token_type, int previous_type);
 
+// remove space
+
+string remove_space(string str);
 
 // validators
 bool _is_operator(string input, int pos, string& op);

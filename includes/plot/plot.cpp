@@ -41,10 +41,14 @@ sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool&
         // if low and high down, zoom factor up
         float zoom_factor_x = (high + 35) / zoom_factor;
         float zoom_factor_y = (high + 35) / zoom_factor; //+ 37.f * zoom_factor
-        sf::Vertex point(sf::Vector2f(x*zoom_factor_x + WINDOW_WIDTH/2 , -1.f*y*zoom_factor_y + WINDOW_HEIGHT / 2));
+
+        float Y = -1.f*y*zoom_factor_y + WINDOW_HEIGHT / 2;
+        float X = x*zoom_factor_x + WINDOW_WIDTH/2;
+        sf::Vertex point(sf::Vector2f(X, Y));
         
         point.color = sf::Color::White;
-        if(point.position.x >= 995 || point.position.y > 900 || point.position.y < 100) continue;
+        if(X >= 1000) continue;
+        if(fabs(Y) >= 900 || fabs(Y) < 100) continue;
         function.append(point);
     }
 
