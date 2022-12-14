@@ -77,13 +77,18 @@ ADD_EXECUTABLE(test_input
     ${SOURCE_FILES}
 )
 
-
+ADD_EXECUTABLE(test_lru
+    _tests/_test_files/test_lru.cpp
+    ${SOURCE_FILES}
+)
 
 
 TARGET_LINK_LIBRARIES(test_shunting_yard_and_rpn gtest)
 TARGET_LINK_LIBRARIES(test_input gtest)
 TARGET_LINK_LIBRARIES(test_tokenizer_shunting_yard gtest)
+TARGET_LINK_LIBRARIES(test_lru gtest)
 TARGET_LINK_LIBRARIES(main gtest)
+
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
@@ -96,6 +101,7 @@ if (SFML_FOUND)
     target_link_libraries(test_shunting_yard_and_rpn ${SFML_LIBRARIES})
     target_link_libraries(test_input ${SFML_LIBRARIES})
     target_link_libraries(test_tokenizer_shunting_yard ${SFML_LIBRARIES})
+    target_link_libraries(test_lru ${SFML_LIBRARIES})
 endif()
 
 

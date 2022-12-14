@@ -3,43 +3,96 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template<typename K, typename V>
 
-struct LRU_Node
-{
-    LRU_Node(K key, V val)
-    {
-        this->_key = key;
-        this->_val = val;
-    }
-    K _key;
-    V _val;
-};
 
-template<typename K, typename V>
+template<class K, class V>
 class LRU
 {
 public:
+    template <typename Key, typename Val>
+    friend ostream& operator <<(ostream& outs, const LRU<Key, Val>& printMe)
+    {
+        outs << "map: " << endl;
+        for(const auto& x : printMe._map)
+        {
+            outs << "key: " << x.first << endl;
+            outs << "val: " << x.second << endl;
+        }
+        outs << endl;
+        outs << "list: ";
+        for(const auto& x : printMe._list)
+        {
+            outs << x << " ";
+        }
+        outs << endl;
+        return outs;
+    }
+
     LRU(int cap)
     {
         this->_capacity = cap;
-        this->_map = unordered_map<K, LRU_Node<K,V>>();
-        this->_list = list<LRU_Node<K, V>>();
+        this->_map = unordered_map<K,V>();
+        this->_list = list<K>();
     } 
+
     ~LRU(){}
+    
+    V get(K key)
+    {
+        if(!this->_map.count(key)) return V();
+        this->make_recent(key);
+        return this->_map[key];
+    }
+    void put(K key, V val)
+    {
+        if(this->_map.count(key))
+        {
+            this->delete_key(key);
+            this->add_recent(key, val);
+            this->_map[key] = val;
+            return;
+        }
+        if(this->_capacity == this->_list.size()) this->remove_latest_unused();
+        this->add_recent(key, val);
+    }
 private:    
     void make_recent(K key)
     {
         if(!this->_map.count(key)) return;
-        LRU_Node<K,V> node = this->_map[key];
-        this->_list.remove(node);
-        this->_list.push_back(node);
+        V val = this->_map[key];
+        this->_list.remove(key);
+        this->_list.push_back(key);
     }
+    
+    void add_recent(K key, V val)
+    {
+        //V val = LRU_Node<K, V>(key, val);
+        this->_list.push_back(key);
+        this->_map[key] = val;
+    }
+
+    void delete_key(K key)
+    {
+        if(!this->_map.count(key)) return;
+        V val = this->_map[key];
+        this->_list.remove(key);
+        this->_map.erase(key);
+    }
+
+    void remove_latest_unused()
+    {
+        if(this->_list.size() == 0 && this->_map.size() == 0) return;
+        K key = this->_list.front();
+        this->_list.pop_front();
+        this->_map.erase(key);
+    }
+
+//private:
     int _capacity;
-    list<LRU_Node<K,V>> _list;
-    unordered_map<K, LRU_Node<K, V>> _map;
+    list<K> _list;
+    unordered_map<K,V> _map;
 };
 
 
-
+    
 #endif // !LRU_H
