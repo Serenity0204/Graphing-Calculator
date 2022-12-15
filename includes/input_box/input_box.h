@@ -31,7 +31,8 @@ public:
 		else
 			textbox.setString("");
 	}
-
+	
+	// sf::Text& get_text(){return this->textbox;}
 	// Make sure font is passed by reference:
 	void setFont(sf::Font &fonts) {
 		textbox.setFont(fonts);
