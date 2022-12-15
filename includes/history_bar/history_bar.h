@@ -15,6 +15,11 @@ class HistoryBar
 public:
     HistoryBar()
     {
+        this->_title.setPosition({1025, 25});
+        this->_title.setCharacterSize(35);
+        this->_title.setFillColor(sf::Color::Blue);
+        this->_title.setString("History: ");
+
         this->_bar.setSize(HISTORY_BAR_SIZE);
         this->_bar.setPosition(HISTORY_BAR_POS);
         this->_buttons = vector<Button>();
@@ -39,6 +44,9 @@ public:
         //vector<string> vec = {"A", "B", "C", "D", "E"};
         sf::Font font = config.get_font(ARIAL);
         window.draw(_bar);
+        this->_title.setFont(font);
+        window.draw(this->_title);
+
         //this->set_lru_to_history(vec);
         for(int i = 4; i >= 0; --i)
         {
@@ -80,7 +88,7 @@ private:
             this->_buttons[i].setText(history[i]);
         }
     }
-
+    sf::Text _title;
     sf::RectangleShape _bar;
     vector<Button> _buttons;
 };

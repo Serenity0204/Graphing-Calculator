@@ -78,14 +78,45 @@ void Engine::input()
             cout << this->_lru << endl;
         }
 
+
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && this->_zoom_factor > ZOOM_MIN)
         {
             cout << "Zooming in" << endl;
             this->_zoom_factor -= ZOOM_DELTA;
             if(!this->_error && this->_points.getVertexCount() != 0) 
             {
-                this->_update_equation();
-                this->_lru.put(this->_current_function, this->_points);
+                //this->_update_equation();
+                string key = this->_lru.get_key(4);
+                this->_current_function = key;
+                this->_input_box.get_text_box().setString(this->_current_function);
+                //this->_update_equation();
+
+                //string func = "";
+                this->_points.clear();
+                //this->_current_function = "";
+                //func += this->_input_box.getText();
+                Tokenizer tk(this->_current_function);
+                Queue<Token*>infix = tk.infix();
+                //cout << "infix: " << infix << endl;
+
+
+                if(infix.empty()) 
+                {
+                    cout << "Tokenize error" << endl;
+                    this->_error = true;
+                    this->_need_reset = true;
+                    return;
+                }
+
+                Plot plot(infix);
+                sf::VertexArray points = plot(this->_low_bound, this->_up_bound, this->_zoom_factor, this->_error);
+                this->_need_reset = this->_error;
+                this->_points = points;
+                // if(!this->_error) this->_current_function = func;
+
+
+                this->_lru.put(key, this->_points);
+                this->_input_box.drawTo(this->_window);
             }
             cout << this->_lru << endl;
         }
@@ -95,8 +126,39 @@ void Engine::input()
             this->_zoom_factor += ZOOM_DELTA;
             if(!this->_error && this->_points.getVertexCount() != 0) 
             {
-                this->_update_equation();
-                this->_lru.put(this->_current_function, this->_points);
+                //this->_update_equation();
+                string key = this->_lru.get_key(4);
+                this->_current_function = key;
+                this->_input_box.get_text_box().setString(this->_current_function);
+                //this->_update_equation();
+
+                //string func = "";
+                this->_points.clear();
+                //this->_current_function = "";
+                //func += this->_input_box.getText();
+                Tokenizer tk(this->_current_function);
+                Queue<Token*>infix = tk.infix();
+                //cout << "infix: " << infix << endl;
+
+
+                if(infix.empty()) 
+                {
+                    cout << "Tokenize error" << endl;
+                    this->_error = true;
+                    this->_need_reset = true;
+                    return;
+                }
+
+                Plot plot(infix);
+                sf::VertexArray points = plot(this->_low_bound, this->_up_bound, this->_zoom_factor, this->_error);
+                this->_need_reset = this->_error;
+                this->_points = points;
+                // if(!this->_error) this->_current_function = func;
+
+
+                this->_lru.put(key, this->_points);
+                this->_input_box.drawTo(this->_window);
+                
             }
             cout << this->_lru << endl;
         }
@@ -107,10 +169,12 @@ void Engine::input()
             this->_need_reset = false;
             this->_error = false;
         }
+
         this->_history_bar.update_buttons(this->_lru.list_to_vec());
 
         int index = -1;
         if(this->_history_bar.isClicked(event, this->_window, index) && index != -1) this->_update_cache(index);
+
         
     }
 }
@@ -122,7 +186,9 @@ void Engine::_update_cache(int index)
     this->_current_function = key;
     this->_points = this->_lru.get(key);
     this->_history_bar.update_buttons(this->_lru.list_to_vec());
-    
+    cout << this->_lru << endl;
+    this->_input_box.get_text_box().setString(this->_current_function);
+    //this->_update_equation();
 }
 
 
@@ -130,6 +196,7 @@ void Engine::_update_cache(int index)
 void Engine::_update_equation()
 {
     string func = "";
+    this->_points.clear();
     this->_current_function = "";
     func += this->_input_box.getText();
     Tokenizer tk(func);
@@ -167,10 +234,10 @@ void Engine::display()
     this->_window.draw(this->_x_axis);
     this->_window.draw(this->_y_axis);
     this->_history_bar.isOver(this->_window);
-    this->_input_box.drawTo(this->_window);
+    
     if(!this->_error) this->_window.draw(this->_points);
     if(this->_error) this->_window.draw(this->_error_image);
-    
+    this->_input_box.drawTo(this->_window);
 }
 
 void Engine::run()

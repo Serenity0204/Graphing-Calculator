@@ -70,7 +70,7 @@ public:
 	std::string getText() {
 		return text.str();
 	}
-
+	sf::Text& get_text_box(){return this->textbox;}
 	void drawTo(sf::RenderWindow &window) {
 
 		window.draw(rect);
