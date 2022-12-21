@@ -75,7 +75,7 @@ void Engine::input()
             cout << "User graphing" << endl;
             this->_update_equation();
             if(!this->_error) this->_lru.put(this->_current_function, this->_points);
-            cout << this->_lru << endl;
+            //cout << this->_lru << endl;
         }
 
 
@@ -83,84 +83,15 @@ void Engine::input()
         {
             cout << "Zooming in" << endl;
             this->_zoom_factor -= ZOOM_DELTA;
-            if(!this->_error && this->_points.getVertexCount() != 0) 
-            {
-                //this->_update_equation();
-                string key = this->_lru.get_key(4);
-                this->_current_function = key;
-                this->_input_box.get_text_box().setString(this->_current_function);
-                //this->_update_equation();
-
-                //string func = "";
-                this->_points.clear();
-                //this->_current_function = "";
-                //func += this->_input_box.getText();
-                Tokenizer tk(this->_current_function);
-                Queue<Token*>infix = tk.infix();
-                //cout << "infix: " << infix << endl;
-
-
-                if(infix.empty()) 
-                {
-                    cout << "Tokenize error" << endl;
-                    this->_error = true;
-                    this->_need_reset = true;
-                    return;
-                }
-
-                Plot plot(infix);
-                sf::VertexArray points = plot(this->_low_bound, this->_up_bound, this->_zoom_factor, this->_error);
-                this->_need_reset = this->_error;
-                this->_points = points;
-                // if(!this->_error) this->_current_function = func;
-
-
-                this->_lru.put(key, this->_points);
-                this->_input_box.drawTo(this->_window);
-            }
-            cout << this->_lru << endl;
+            this->_zoom_helper();
+            //cout << this->_lru << endl;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && this->_zoom_factor < ZOOM_MAX)
         {
             cout << "Zooming out" << endl;
             this->_zoom_factor += ZOOM_DELTA;
-            if(!this->_error && this->_points.getVertexCount() != 0) 
-            {
-                //this->_update_equation();
-                string key = this->_lru.get_key(4);
-                this->_current_function = key;
-                this->_input_box.get_text_box().setString(this->_current_function);
-                //this->_update_equation();
-
-                //string func = "";
-                this->_points.clear();
-                //this->_current_function = "";
-                //func += this->_input_box.getText();
-                Tokenizer tk(this->_current_function);
-                Queue<Token*>infix = tk.infix();
-                //cout << "infix: " << infix << endl;
-
-
-                if(infix.empty()) 
-                {
-                    cout << "Tokenize error" << endl;
-                    this->_error = true;
-                    this->_need_reset = true;
-                    return;
-                }
-
-                Plot plot(infix);
-                sf::VertexArray points = plot(this->_low_bound, this->_up_bound, this->_zoom_factor, this->_error);
-                this->_need_reset = this->_error;
-                this->_points = points;
-                // if(!this->_error) this->_current_function = func;
-
-
-                this->_lru.put(key, this->_points);
-                this->_input_box.drawTo(this->_window);
-                
-            }
-            cout << this->_lru << endl;
+            this->_zoom_helper();
+            //cout << this->_lru << endl;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
@@ -179,6 +110,37 @@ void Engine::input()
     }
 }
 
+
+void Engine::_zoom_helper()
+{
+    if(!this->_error && this->_points.getVertexCount() != 0) 
+    {
+        string key = this->_lru.get_key(4);
+        this->_current_function = key;
+        this->_input_box.get_text_box().setString(this->_current_function);
+        this->_points.clear();
+        Tokenizer tk(this->_current_function);
+        Queue<Token*>infix = tk.infix();
+
+
+        if(infix.empty()) 
+        {
+            cout << "Tokenize error" << endl;
+            this->_error = true;
+            this->_need_reset = true;
+            return;
+        }
+
+        Plot plot(infix);
+        sf::VertexArray points = plot(this->_low_bound, this->_up_bound, this->_zoom_factor, this->_error);
+        this->_need_reset = this->_error;
+        this->_points = points;
+        this->_lru.put(key, this->_points);
+        this->_input_box.drawTo(this->_window);
+    }
+}
+
+
 void Engine::_update_cache(int index)
 {
     string key = this->_lru.get_key(index);
@@ -188,7 +150,6 @@ void Engine::_update_cache(int index)
     this->_history_bar.update_buttons(this->_lru.list_to_vec());
     cout << this->_lru << endl;
     this->_input_box.get_text_box().setString(this->_current_function);
-    //this->_update_equation();
 }
 
 

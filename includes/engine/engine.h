@@ -32,15 +32,8 @@ private:
     float _zoom_factor;
     float _low_bound;
     float _up_bound;
-    bool is_full()
-    {
-        for(int i = 0; i < 5; ++i)
-        {
-            string unset = "Unset " + to_string(i);
-            if(this->_lru[i] == unset) return false;
-        }
-        return true;
-    }
+
+    void _zoom_helper();
     void _update_cache(int index);
     void _update_equation();
     void _update_input_box();

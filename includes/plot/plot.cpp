@@ -27,6 +27,7 @@ sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool&
 
     ColorGenerator cg;
     sf::Color color = cg.get_rand_color();
+    
     for(float x = low; x < high; x+=0.0005)
     {   
 
@@ -55,6 +56,11 @@ sf::VertexArray Plot::operator()(float low, float high, float zoom_factor, bool&
         function.append(point);
     }
 
-
+    if(function.getVertexCount() == 0)
+    {
+        error = true;
+        function.clear();
+        return function;
+    } 
     return function;
 }

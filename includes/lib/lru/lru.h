@@ -37,14 +37,7 @@ public:
     } 
 
     ~LRU(){}
-    const K& operator [](int index)
-    {
-        int count = 0;
-        for(const auto& x: this->_list)
-        {
-            if(count == index) return x;
-        }
-    }   
+  
     V get(K key)
     {
         assert(this->_map.count(key) > 0);
@@ -73,7 +66,7 @@ public:
         }
         return res;
     }
-    K get_key(int index)
+    const K& get_key(int index)
     {
         int count = 0;
         for(const auto& x: this->_list)
