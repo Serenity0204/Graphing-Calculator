@@ -33,13 +33,19 @@ void Function::set_args()
 
 double Function::evaluate(double num, double optional)
 {
-
+    
     if(this->_function == "sin") return sin(num);
     
     if(this->_function == "cos") return cos(num);
     
     if(this->_function == "tan") return tan(num);
     
+    if(this->_function == "cot") return (1/tan(num));
+
+    if(this->_function == "sec") return (1/cos(num));
+
+    if(this->_function == "csc") return (1/sin(num));
+
     if(this->_function == "arcsin") return asin(num);
     
     if(this->_function == "arccos") return acos(num);
@@ -61,6 +67,7 @@ double Function::evaluate(double num, double optional)
     if(this->_function == "max") return max(num, optional);
     
     if(this->_function == "min") return min(num, optional);
+    
     return 0;
 }
      

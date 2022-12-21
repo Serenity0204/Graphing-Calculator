@@ -16,16 +16,9 @@ Queue<int> _tokenize(string input, Queue<string>& tokens)
     Queue<int> token_types;
     while(index < input.length())
     {   
-        //cout << "index: " << index << endl;
         string token = "";
         int token_type = 0;
-        // if it's space, skip
 
-        // if(input[index] == ' ' || input[index] == ',')
-        // {
-        //     index++;
-        //     continue;
-        // }
         int idx_hold = index;
         int prev_type = (!token_types.empty()) ? token_types.back() : -1;
         _get_token(input, index, token, token_type, prev_type);
@@ -231,7 +224,24 @@ bool _is_function(string str, int pos, string& func)
         return true;
     }
 
+    if(str.substr(pos, 3) == "sec")
+    {
+        func += "sec";
+        return true;  
+    }
 
+    if(str.substr(pos, 3) == "csc")
+    {
+        func += "csc";
+        return true;
+    }
+
+    if(str.substr(pos, 3) == "cot")
+    {
+        func += "cot";
+        return true;
+    }
+    
     if(str.substr(pos, 3) == "sin")
     {
         func += "sin";

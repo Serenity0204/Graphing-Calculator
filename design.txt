@@ -1,0 +1,15 @@
+project structure:
+    --assets // used to store image and Font
+    --includes // where all of the code reside
+      --button // clickable button class
+      --config // managing global resource
+      --engine // processing input/output and updating the screen
+      --history_bar // a clickable sidebar that stores user input history 
+      --lib // library used in this project: self implemented linkedlist functions, stack, queue, rpn, shunting yard, and token
+      --input_box // input box that allows user to input from Keyboard
+      --plot // a class that convert user expression to points
+      --tokenizer // parse the input string into tokens
+    --main.cpp // the main entry of the program
+    --design.txt // project introduction
+    --CMakeLists.txt // cmake for this project
+
