@@ -1,4 +1,5 @@
 project structure:
+    --_tests // unit test using gtest framework(setup included in cmake)
     --assets // used to store image and Font
     --includes // where all of the code reside
       --button // clickable button class
