@@ -148,7 +148,7 @@ void Engine::_update_cache(int index)
     this->_current_function = key;
     this->_points = this->_lru.get(key);
     this->_history_bar.update_buttons(this->_lru.list_to_vec());
-    cout << this->_lru << endl;
+    //cout << this->_lru << endl;
     this->_input_box.get_text_box().setString(this->_current_function);
 }
 
