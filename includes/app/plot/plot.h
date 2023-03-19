@@ -1,9 +1,9 @@
 #ifndef PLOT_H
 #define PLOT_H
 #include <bits/stdc++.h>
-#include "../lib/shunting_yard/shunting_yard.h"
-#include "../lib/rpn/rpn.h"
-#include "../config/config.h"
+#include "../../components/shunting_yard/shunting_yard.h"
+#include "../../components/rpn/rpn.h"
+#include "../../core/config/config.h"
 #include <SFML/Graphics.hpp>
 
 

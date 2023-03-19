@@ -45,6 +45,16 @@ enable_testing()
 
 # ------------------------------------
 
+set(SFML_VERSION "2.5.1")
+
+# Declare SFML as an external project
+FetchContent_Declare(
+  SFML
+  URL https://www.sfml-dev.org/files/SFML-${SFML_VERSION}-sources.zip
+)
+
+# Build SFML as part of the project
+FetchContent_MakeAvailable(SFML)
 
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -89,20 +99,11 @@ TARGET_LINK_LIBRARIES(test_tokenizer_shunting_yard gtest)
 TARGET_LINK_LIBRARIES(test_lru gtest)
 TARGET_LINK_LIBRARIES(main gtest)
 
+TARGET_LINK_LIBRARIES(main sfml-graphics sfml-window sfml-system)
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
-find_package(SFML REQUIRED system window graphics network audio)
-if (SFML_FOUND)
-    include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(main ${SFML_LIBRARIES})
-    target_link_libraries(test_shunting_yard_and_rpn ${SFML_LIBRARIES})
-    target_link_libraries(test_input ${SFML_LIBRARIES})
-    target_link_libraries(test_tokenizer_shunting_yard ${SFML_LIBRARIES})
-    target_link_libraries(test_lru ${SFML_LIBRARIES})
-endif()
 
 
 
