@@ -1,17 +1,12 @@
 #ifndef RPN_H
 #define RPN_H
 
-#include <bits/stdc++.h>
-
+#include <string>
+#include <iostream>
 #include "../queue/MyQueue.h"
 #include "../stack/MyStack.h"
-#include "../token/token.h"
-#include "../token/function.h"
-#include "../token/integer.h"
-#include "../token/operator.h"
-#include "../token/leftparen.h"
-#include "../token/rightparen.h"
-#include "../token/variable.h"
+#include "../token/token_header.h"
+
 
 
 using namespace std;

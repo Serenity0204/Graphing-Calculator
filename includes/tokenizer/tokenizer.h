@@ -1,16 +1,11 @@
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
-#include <bits/stdc++.h>
-#include "../../queue/MyQueue.h"
-#include "../../stack/MyStack.h"
-#include "../../token/token.h"
-#include "../../token/function.h"
-#include "../../token/integer.h"
-#include "../../token/operator.h"
-#include "../../token/leftparen.h"
-#include "../../token/rightparen.h"
+#include <string>
+#include "../queue/MyQueue.h"
+#include "../stack/MyStack.h"
+#include "../token/token_header.h"
 #include "../tokenizer_functions/tokenizer_functions.h"
-#include "../../token/variable.h"
+
 
 
 

@@ -1,7 +1,10 @@
 #ifndef CONFIG_H
 #define CONFIG_H
-#include <bits/stdc++.h>
 #include <SFML/Graphics.hpp>
+#include <memory>
+#include <cassert>
+#include <unordered_map>
+#include <iostream>
 using namespace std;
 
 

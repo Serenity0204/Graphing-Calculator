@@ -1,9 +1,9 @@
 #ifndef HISTORY_BAR_H
 #define HISTORY_BAR_H
-#include <bits/stdc++.h>
+#include <vector>
 #include <SFML/Graphics.hpp>
-#include "../../core/button/button.h"
-#include "../../core/config/config.h"
+#include "../button/button.h"
+#include "../config/config.h"
 
 using namespace std;
 

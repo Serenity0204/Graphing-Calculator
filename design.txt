@@ -3,13 +3,10 @@ project structure:
     --assets // used to store image and Font
 
     --includes // where all of the code reside
-      --core // preexisting sfml code
         --button // clickable button class
         --config // managing global resource
         --engine // processing input/output and updating the screen
         --input_box // input box that allows user to input from Keyboard
-
-      --components // components used in this project
         --linked_list_functions // singly linkedlist functions 
         --lru // LRU cache
         --node // linkedlist node 
@@ -19,8 +16,6 @@ project structure:
         --shunting_yard // shunting yard algorithm
         --token // tokens used for rpn and shunting yard
         --tokenizer // tokenize input string into tokens
-
-      --app // where all of the sfml headers for this project reside
         --plot // a class that convert user expression to points
         --history_bar // a clickable sidebar that stores user input history 
         

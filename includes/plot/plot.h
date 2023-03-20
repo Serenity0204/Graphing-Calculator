@@ -1,9 +1,11 @@
 #ifndef PLOT_H
 #define PLOT_H
-#include <bits/stdc++.h>
-#include "../../components/shunting_yard/shunting_yard.h"
-#include "../../components/rpn/rpn.h"
-#include "../../core/config/config.h"
+#include <unordered_map>
+#include <string>
+#include <iostream>
+#include "../shunting_yard/shunting_yard.h"
+#include "../rpn/rpn.h"
+#include "../config/config.h"
 #include <SFML/Graphics.hpp>
 
 

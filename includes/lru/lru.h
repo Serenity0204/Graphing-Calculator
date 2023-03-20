@@ -1,6 +1,8 @@
 #ifndef LRU_H
 #define LRU_H
-#include <bits/stdc++.h>
+#include <iostream>
+#include <list>
+#include <unordered_map>
 using namespace std;
 
 

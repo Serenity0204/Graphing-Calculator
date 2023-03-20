@@ -4,7 +4,8 @@
 
 #include "token.h"
 #include "constants.h"
-#include <bits/stdc++.h>
+#include <string>
+#include <iostream>
 #include "../queue/MyQueue.h"
 using namespace std;
 

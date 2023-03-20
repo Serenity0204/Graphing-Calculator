@@ -1,9 +1,11 @@
 #ifndef TOKENIZER_FUNCTIONS_H
 #define TOKENIZER_FUNCTIONS_H
-#include <bits/stdc++.h>
-#include "../../queue/MyQueue.h"
-#include "../../stack/MyStack.h"
-#include "../../token/constants.h"
+
+#include <string>
+#include <algorithm>
+#include "../queue/MyQueue.h"
+#include "../stack/MyStack.h"
+#include "../token/token_header.h"
 using namespace std;
 
 

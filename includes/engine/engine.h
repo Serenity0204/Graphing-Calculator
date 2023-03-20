@@ -1,13 +1,13 @@
 #ifndef ENGINE_H
 #define ENGINE_H
-#include <bits/stdc++.h>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "../config/config.h"
 #include "../input_box/input_box.h"
-#include "../../app/plot/plot.h"
-#include "../../app/history_bar/history_bar.h"
-#include "../../components/tokenizer/tokenizer/tokenizer.h"
-#include "../../components/lru/lru.h"
+#include "../plot/plot.h"
+#include "../history_bar/history_bar.h"
+#include "../tokenizer/tokenizer.h"
+#include "../lru/lru.h"
 using namespace std;
 
 
