@@ -7,7 +7,7 @@
 #include <string>
 //------------------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../includes/tokenizer/tokenizer_functions/tokenizer_functions.h"
+#include "../../includes/tokenizer/tokenizer_functions.h"
 
 
 //------------------------------------------------------------------------------

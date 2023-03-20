@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include "../linked_list_functions/linked_list_functions.h"
+#include "../linked_list/linked_list_functions.h"
 
 
 using namespace std;

@@ -3,7 +3,7 @@
 
 #include <cassert>
 
-#include "../node/node.h"
+#include "node.h"
 
 using namespace std;
 

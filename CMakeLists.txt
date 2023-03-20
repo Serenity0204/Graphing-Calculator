@@ -99,6 +99,10 @@ TARGET_LINK_LIBRARIES(test_tokenizer_shunting_yard gtest)
 TARGET_LINK_LIBRARIES(test_lru gtest)
 TARGET_LINK_LIBRARIES(main gtest)
 
+TARGET_LINK_LIBRARIES(test_shunting_yard_and_rpn sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(test_input sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(test_tokenizer_shunting_yard sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(test_lru sfml-graphics sfml-window sfml-system)
 TARGET_LINK_LIBRARIES(main sfml-graphics sfml-window sfml-system)
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
