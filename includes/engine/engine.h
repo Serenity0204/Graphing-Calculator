@@ -1,17 +1,16 @@
 #ifndef ENGINE_H
 #define ENGINE_H
-#include <string>
-#include <SFML/Graphics.hpp>
 #include "../config/config.h"
-#include "../input_box/input_box.h"
-#include "../plot/plot.h"
 #include "../history_bar/history_bar.h"
-#include "../tokenizer/tokenizer.h"
+#include "../input_box/input_box.h"
 #include "../lru/lru.h"
+#include "../plot/plot.h"
+#include "../tokenizer/tokenizer.h"
+#include <SFML/Graphics.hpp>
+#include <string>
 using namespace std;
 
-
-class Engine 
+class Engine
 {
 private:
     // sfml
@@ -38,6 +37,14 @@ private:
     void _update_equation();
     void _update_input_box();
     void _update_history_box();
+    void _clear_infix(Queue<Token*>& infix)
+    {
+        if (infix.empty()) return;
+        typename Queue<Token*>::Iterator it;
+        for (it = infix.begin(); it != infix.end(); ++it) delete (*it);
+        cout << "cleared" << endl;
+    }
+
 public:
     Engine();
     ~Engine();
@@ -45,8 +52,5 @@ public:
     void run();
     void display();
 };
-
-
-
 
 #endif
