@@ -52,16 +52,16 @@ sf::Font& Config::get_font(int index)
 void Config::_set_texture()
 {
     auto t1 = std::make_shared<sf::Texture>();
-    t1->loadFromFile("../assets/cat1.png");
+    t1->loadFromFile("assets/cat1.png");
     this->_texture_map[BACK_GROUND] = t1;
     auto t2 = std::make_shared<sf::Texture>();
-    t2->loadFromFile("../assets/dog.png");
+    t2->loadFromFile("assets/dog.png");
     this->_texture_map[ERROR_IMAGE] = t2;
 }
 
 void Config::_set_font()
 {
     auto f1 = std::make_shared<sf::Font>();
-    f1->loadFromFile("../assets/arial.ttf");
+    f1->loadFromFile("assets/arial.ttf");
     this->_font_map[ARIAL] = f1;
 }

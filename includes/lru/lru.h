@@ -68,7 +68,7 @@ public:
         }
         return res;
     }
-    const K& get_key(int index)
+    const K& get_key(int index) const
     {
         int count = 0;
         for(const auto& x: this->_list)
@@ -76,6 +76,9 @@ public:
             if(count == index) return x;
             count++;
         }  
+        // should not go here
+        assert(!this->_list.empty());
+        return this->_list.front();
     }
 private:    
     void make_recent(K key)
