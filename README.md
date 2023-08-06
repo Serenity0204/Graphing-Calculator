@@ -14,13 +14,10 @@ operations including + - * / ^, along with single variable x.
 
 The functions supported are listed below:
 
-
-
-
-
 [![functions.png](https://i.postimg.cc/C5Hnm0cL/functions.png)](https://postimg.cc/sGx2gkFt)
 
-
+## Tutorial
+* part 1: https://medium.com/@eduboost0204/build-a-graphing-calculator-in-c-sfml-part-1-setup-and-introduction-3cb469a43ca3
 ## Demo
 
 [![demo1.png](https://i.postimg.cc/CxJt9fRb/demo1.png)](https://postimg.cc/BjLMKbcv)
