@@ -127,36 +127,3 @@ TARGET_LINK_LIBRARIES(main sfml-graphics sfml-window sfml-system)
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR}/bin)
 
-
-
-## for other cmake files to install
-add_library(Graphing-Calculator ${SOURCE_FILES})
-target_include_directories(Graphing-Calculator PUBLIC 
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>
-    $<INSTALL_INTERFACE:include>  # <prefix>/include
-)
-
-target_link_libraries(Graphing-Calculator PUBLIC sfml-graphics sfml-window sfml-system)
-
-# Install library target
-install(TARGETS Graphing-Calculator
-    EXPORT Graphing-CalculatorTargets
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
-)
-
-# This makes project importable from the install directory
-# Put config file into the CMake user package registry
-install(EXPORT Graphing-CalculatorTargets
-    FILE Graphing-CalculatorTargets.cmake
-    NAMESPACE Graphing-Calculator::
-    DESTINATION lib/cmake/Graphing-Calculator
-)
-
-# This makes project importable from the build directory
-export(TARGETS Graphing-Calculator
-    NAMESPACE Graphing-Calculator::
-    FILE ${CMAKE_CURRENT_BINARY_DIR}/Graphing-Calculator.cmake
-)

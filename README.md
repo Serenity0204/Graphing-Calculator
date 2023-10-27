@@ -28,25 +28,7 @@ The functions supported are listed below:
 
 ## How To Run
 ```
-## Include This CMakeLists.txt File 
-## Open VS Code
-## Make Sure You Have The CMake Tools Extension Installed
-## Run The Main Using The Tool Bar
-
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR) #FetchContent_MakeAvailable
-project(Graphing-Calculator-Usage)
-
-if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-endif()
-
-## Fetch the content
-include(FetchContent)
-FetchContent_Declare(
-  Graphing-Calculator
-  GIT_REPOSITORY https://github.com/Serenity0204/Graphing-Calculator
-)
-FetchContent_MakeAvailable(Graphing-Calculator)
+TBD
 
 ```
 
