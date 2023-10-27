@@ -27,12 +27,11 @@ The functions supported are listed below:
 [![demo3.png](https://i.postimg.cc/XNwsTyhX/demo3.png)](https://postimg.cc/SjxL9jmp)
 
 ## How To Run
-```
-TBD
+* Clone the repo
+* Build it with CMake
+* Run the program
 
-```
-
-
+  
 ## Design
 Can be found in 
 https://github.com/Serenity0204/Graphing_Calculator_SFML/blob/master/design.txt
